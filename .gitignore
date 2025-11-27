@@ -1,0 +1,17 @@
+# Node & build
+node_modules/
+dist/
+tmp/
+coverage/
+*.log
+
+# OS
+.DS_Store
+
+# Env & secrets
+.env
+.env.local
+.env.*
+
+# Trae IDE
+.trae/

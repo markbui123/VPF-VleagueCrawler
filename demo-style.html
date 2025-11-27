@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Business Dashboard Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-body: #f3f4f6;
+      --bg-surface: #ffffff;
+      --bg-surface-soft: #f9fafb;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --primary-dark: #1d4ed8;
+      --accent: #10b981;
+      --border-soft: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --text-soft: #9ca3af;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --shadow-card: 0 8px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+    }
+
+    .layout-root {
+      display: flex;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f3f4f6 0, #e5e7eb 120%);
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 250px;
+      background: #020617;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 16px;
+      gap: 18px;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 4px 10px;
+      border-bottom: 1px solid rgba(75, 85, 99, 0.9);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 20%, #3b82f6 0, #1d4ed8 45%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .sidebar-group-title {
+      margin: 0 0 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #6b7280;
+    }
+
+    .sidebar-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #e5e7eb;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.14s ease-out;
+    }
+
+    .nav-item span.icon {
+      width: 18px;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .nav-item.active {
+      background: #0f172a;
+      border-color: #1d4ed8;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+    }
+
+    .nav-item:hover:not(.active) {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(55, 65, 81, 0.9);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    /* MAIN */
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 20px 22px;
+      gap: 16px;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .topbar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      background: var(--bg-surface);
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      font-size: 13px;
+    }
+
+    .search-box span.icon {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 13px;
+      min-width: 140px;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.6);
+      transition: background 0.12s ease-out, transform 0.12s ease-out, box-shadow 0.12s ease-out;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.65);
+    }
+
+    .btn-primary span.icon {
+      font-size: 14px;
+    }
+
+    .user-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface);
+    }
+
+    .user-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    }
+
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .user-role {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* CONTENT */
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* FILTER BAR */
+
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+    }
+
+    .filter-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface-soft);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .pill.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    .filter-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .filter-right .label {
+      color: var(--text-soft);
+    }
+
+    .select {
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafb;
+      font-size: 12px;
+    }
+
+    /* GRID AREA: KPIs + PIPELINE */
+
+    .grid-top {
+      display: grid;
+      grid-template-columns: 2.2fr 1.2fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-caption {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .card-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface-soft);
+      color: var(--text-soft);
+    }
+
+    .badge.primary {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .kpi-card {
+      padding: 10px 10px 8px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .kpi-value {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .kpi-trend {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .kpi-trend span.up {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .kpi-trend span.down {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    .chart-box {
+      margin-top: 4px;
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-strong);
+      padding: 12px;
+      font-size: 12px;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9fafb;
+    }
+
+    .chart-box span {
+      opacity: 0.9;
+    }
+
+    /* PIPELINE CARD */
+
+    .pipeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .pipeline-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pipeline-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .pipeline-label {
+      font-weight: 500;
+    }
+
+    .pipeline-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .pipeline-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 11px;
+      gap: 2px;
+    }
+
+    .tag {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface-soft);
+    }
+
+    .tag.green {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: rgba(16, 185, 129, 0.09);
+      color: #047857;
+      font-weight: 500;
+    }
+
+    .tag.orange {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: rgba(245, 158, 11, 0.08);
+      color: #92400e;
+      font-weight: 500;
+    }
+
+    .tag.red {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.08);
+      color: #991b1b;
+      font-weight: 500;
+    }
+
+    /* GRID BOTTOM: TABLE + RIGHT COLUMN */
+
+    .grid-bottom {
+      display: grid;
+      grid-template-columns: 2.1fr 1.2fr;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .table-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .table-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .table-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .table-caption {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .table-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .chip {
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface-soft);
+      cursor: pointer;
+    }
+
+    .chip.active {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      background: var(--primary-soft);
+      font-weight: 500;
+    }
+
+    .table-wrapper {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      background: var(--bg-surface-soft);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    thead {
+      background: #f3f4f6;
+    }
+
+    th, td {
+      padding: 8px 9px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 11px;
+    }
+
+    tbody tr:hover {
+      background: rgba(219, 234, 254, 0.4);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid transparent;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+
+    .status-open {
+      border-color: rgba(37, 99, 235, 0.6);
+      background: rgba(37, 99, 235, 0.06);
+      color: #1d4ed8;
+    }
+
+    .status-inprogress {
+      border-color: rgba(16, 185, 129, 0.6);
+      background: rgba(16, 185, 129, 0.06);
+      color: #047857;
+    }
+
+    .status-blocked {
+      border-color: rgba(220, 38, 38, 0.7);
+      background: rgba(220, 38, 38, 0.05);
+      color: #b91c1c;
+    }
+
+    .status-open .status-dot {
+      background: #3b82f6;
+    }
+
+    .status-inprogress .status-dot {
+      background: #22c55e;
+    }
+
+    .status-blocked .status-dot {
+      background: #f97373;
+    }
+
+    /* RIGHT COLUMN: ACTIVITIES + SUMMARY */
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .activity-card,
+    .summary-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-card);
+      padding: 12px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .card-small-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .card-small-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .activity-list {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .dot-timeline {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--primary);
+      margin-top: 4px;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .activity-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .activity-main {
+      font-size: 12px;
+    }
+
+    .activity-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--border-soft);
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-key {
+      color: var(--text-soft);
+    }
+
+    .summary-value {
+      font-weight: 500;
+    }
+
+    .summary-value.positive {
+      color: var(--accent);
+    }
+
+    .summary-value.negative {
+      color: var(--danger);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        padding: 14px 12px 18px;
+      }
+
+      .grid-top,
+      .grid-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search-box input {
+        min-width: 90px;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout-root">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">DB</div>
+        <div class="brand-meta">
+          <div class="brand-title">DashBiz</div>
+          <div class="brand-sub">Business Console</div>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <h4 class="sidebar-group-title">Main</h4>
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <span class="icon">▣</span>
+            <span>Overview</span>
+          </li>
+          <li class="nav-item">
+            <span class="icon">☰</span>
+            <span>Sales & Revenue</span>
+          </li>
+          <li class="nav-item">
+            <span class="icon">⧉</span>
+            <span>Operations</span>
+          </li>
+          <li class="nav-item">
+            <span class="icon">⚑</span>
+            <span>Customers</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-group">
+        <h4 class="sidebar-group-title">Analytics</h4>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <span class="icon">◆</span>
+            <span>Performance</span>
+          </li>
+          <li class="nav-item">
+            <span class="icon">◧</span>
+            <span>Segments</span>
+          </li>
+          <li class="nav-item">
+            <span class="icon">★</span>
+            <span>Reports</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        Dashboard demo theo phong cách<br />
+        <strong>Business Dashboard Style</strong><br />
+        Gắn chart hoặc dữ liệu thực qua JS / API.
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="page-title">Business Overview</div>
+          <div class="page-subtitle">
+            Tóm tắt hiệu suất kinh doanh, pipeline và hoạt động trong ngày.
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="search-box">
+            <span class="icon">🔍</span>
+            <input type="text" placeholder="Tìm kiếm khách hàng, ticket, deal…" />
+          </div>
+          <button class="btn-primary">
+            <span class="icon">＋</span>
+            New Deal
+          </button>
+          <div class="user-mini">
+            <div class="user-avatar"></div>
+            <div class="user-meta">
+              <div class="user-name">Duc Bui</div>
+              <div class="user-role">Admin</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- FILTER BAR -->
+      <section class="filter-bar">
+        <div class="filter-left">
+          <span>Khoảng thời gian:</span>
+          <div class="pill active">Last 30 days</div>
+          <div class="pill">Quarter to date</div>
+          <div class="pill">Year to date</div>
+        </div>
+        <div class="filter-right">
+          <span class="label">View:</span>
+          <select class="select">
+            <option>Global overview</option>
+            <option>By region</option>
+            <option>By team</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- CONTENT -->
+      <section class="content">
+        <!-- GRID TOP: KPIs + PIPELINE -->
+        <div class="grid-top">
+          <!-- KPI CARD -->
+          <article class="card">
+            <div class="card-header">
+              <div class="card-title-block">
+                <div class="card-title">Key KPIs</div>
+                <div class="card-caption">Các chỉ số chính trong 30 ngày gần nhất.</div>
+              </div>
+              <div class="card-badges">
+                <span class="badge primary">Live</span>
+                <span class="badge">Auto-refresh 15m</span>
+              </div>
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="kpi-label">Revenue</div>
+                <div class="kpi-value">$482K</div>
+                <div class="kpi-trend">
+                  <span class="up">▲ +12.4%</span> vs kỳ trước
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">New Deals</div>
+                <div class="kpi-value">63</div>
+                <div class="kpi-trend">
+                  <span class="up">▲ +8</span> deal mới
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Win Rate</div>
+                <div class="kpi-value">31.9%</div>
+                <div class="kpi-trend">
+                  <span class="up">▲ +2.1%</span> cải thiện
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-label">Open Tickets</div>
+                <div class="kpi-value">27</div>
+                <div class="kpi-trend">
+                  <span class="down">▼ +5</span> cần xử lý
+                </div>
+              </div>
+            </div>
+            <div class="chart-box">
+              <span>Placeholder cho chart (line / area chart: Revenue & New deals theo ngày)</span>
+            </div>
+          </article>
+
+          <!-- PIPELINE CARD -->
+          <article class="card">
+            <div class="card-header">
+              <div class="card-title-block">
+                <div class="card-title">Sales Pipeline</div>
+                <div class="card-caption">Các giai đoạn pipeline và deal quan trọng.</div>
+              </div>
+              <div class="card-badges">
+                <span class="badge">Weighted: $760K</span>
+              </div>
+            </div>
+            <div class="pipeline-list">
+              <div class="pipeline-item">
+                <div class="pipeline-left">
+                  <span class="pipeline-label">Qualifying</span>
+                  <span class="pipeline-meta">14 deals • $120K</span>
+                </div>
+                <div class="pipeline-right">
+                  <span class="tag">Conversion ~ 25%</span>
+                  <span>Avg. 4 days</span>
+                </div>
+              </div>
+              <div class="pipeline-item">
+                <div class="pipeline-left">
+                  <span class="pipeline-label">Proposal</span>
+                  <span class="pipeline-meta">9 deals • $210K</span>
+                </div>
+                <div class="pipeline-right">
+                  <span class="tag green">Healthy</span>
+                  <span>Conversion ~ 42%</span>
+                </div>
+              </div>
+              <div class="pipeline-item">
+                <div class="pipeline-left">
+                  <span class="pipeline-label">Negotiation</span>
+                  <span class="pipeline-meta">5 deals • $190K</span>
+                </div>
+                <div class="pipeline-right">
+                  <span class="tag orange">Attention needed</span>
+                  <span>Stuck > 10 days</span>
+                </div>
+              </div>
+              <div class="pipeline-item">
+                <div class="pipeline-left">
+                  <span class="pipeline-label">At Risk</span>
+                  <span class="pipeline-meta">3 deals • $140K</span>
+                </div>
+                <div class="pipeline-right">
+                  <span class="tag red">High risk</span>
+                  <span>Follow-up today</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- GRID BOTTOM: TABLE + RIGHT COLUMN -->
+        <div class="grid-bottom">
+          <!-- TABLE: ACTIVE ITEMS -->
+          <article class="table-card">
+            <div class="table-header">
+              <div class="table-title-block">
+                <div class="table-title">Active Items</div>
+                <div class="table-caption">Top deals / tickets đang mở cần theo dõi.</div>
+              </div>
+              <div class="table-controls">
+                <span>Group by:</span>
+                <div class="chip active">Owner</div>
+                <div class="chip">Stage</div>
+                <div class="chip">Type</div>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Owner</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#DL-1028</td>
+                    <td>Lan Pham</td>
+                    <td>Deal</td>
+                    <td>$85K</td>
+                    <td>
+                      <span class="status-pill status-inprogress">
+                        <span class="status-dot"></span> In progress
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#TK-553</td>
+                    <td>Duc Bui</td>
+                    <td>Support</td>
+                    <td>—</td>
+                    <td>
+                      <span class="status-pill status-open">
+                        <span class="status-dot"></span> Open
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#DL-1042</td>
+                    <td>Minh Tran</td>
+                    <td>Deal</td>
+                    <td>$120K</td>
+                    <td>
+                      <span class="status-pill status-blocked">
+                        <span class="status-dot"></span> Blocked
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#TK-559</td>
+                    <td>Mai Nguyen</td>
+                    <td>Support</td>
+                    <td>—</td>
+                    <td>
+                      <span class="status-pill status-inprogress">
+                        <span class="status-dot"></span> In progress
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- RIGHT COLUMN -->
+          <div class="right-column">
+            <!-- ACTIVITY -->
+            <section class="activity-card">
+              <div>
+                <div class="card-small-title">Recent activity</div>
+                <div class="card-small-sub">Các sự kiện gần nhất từ team.</div>
+              </div>
+              <ul class="activity-list">
+                <li class="activity-item">
+                  <div class="dot-timeline"></div>
+                  <div class="activity-content">
+                    <div class="activity-main">
+                      Lan Pham vừa cập nhật deal <strong>#DL-1028</strong> sang stage “Negotiation”.
+                    </div>
+                    <div class="activity-meta">3 phút trước • Channel: Sales</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="dot-timeline"></div>
+                  <div class="activity-content">
+                    <div class="activity-main">
+                      Ticket <strong>#TK-553</strong> được gán cho <strong>Duc Bui</strong>.
+                    </div>
+                    <div class="activity-meta">26 phút trước • Channel: Support</div>
+                  </div>
+                </li>
+                <li class="activity-item">
+                  <div class="dot-timeline"></div>
+                  <div class="activity-content">
+                    <div class="activity-main">
+                      Xuất báo cáo “Monthly Performance” gửi ban điều hành.
+                    </div>
+                    <div class="activity-meta">1 giờ trước • Channel: System</div>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <!-- SUMMARY -->
+            <section class="summary-card">
+              <div>
+                <div class="card-small-title">Quick summary</div>
+                <div class="card-small-sub">Tổng hợp nhanh cho buổi họp hôm nay.</div>
+              </div>
+              <div class="summary-row">
+                <span class="summary-key">Total pipeline</span>
+                <span class="summary-value">$1.24M</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-key">Projected this month</span>
+                <span class="summary-value positive">+18.2%</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-key">Churn risk accounts</span>
+                <span class="summary-value negative">5 high risk</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-key">Average response time</span>
+                <span class="summary-value">1h 23m</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

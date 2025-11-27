@@ -1,0 +1,173 @@
+<% 
+  const toVnTime = (t) => {
+    const tt = String(t || '').trim();
+    return tt ? tt.replace(':', 'h') : '';
+  };
+  const formatThuNgayTime = (s, gio) => {
+    const parts = String(s || '').split(' - ');
+    const w = parts[0] ? parts[0].trim() : '';
+    const d = parts[1] ? parts[1].trim() : '';
+    const time = toVnTime(gio);
+    const firstLine = `${time ? time + ' - ' : ''}${w}`;
+    const secondLine = d ? 'Ngày ' + d : '';
+    return `${firstLine}<br />${secondLine}`;
+  };
+  const toRoundNum = (name) => { const mm = String(name || '').match(/(\d+)/); return mm ? parseInt(mm[1], 10) : 9999; };
+  const makeLink = () => { const params = new URLSearchParams(); params.set('seasonId', String(selectedSeasonId || '')); if (vongFilter) params.set('vong', vongFilter); if (teamFilter) params.set('team', teamFilter); if (resultFilter) params.set('result', resultFilter); if (varFilter) params.set('var', varFilter); return `/listing?${params.toString()}`; };
+  const roundNames = Object.keys(groups).sort((a,b)=>toRoundNum(a)-toRoundNum(b));
+%>
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+    <script>
+      function onSeasonChange(sel){ const id = sel.value; const url = new URL(window.location.href); url.searchParams.set('seasonId', id); window.location.href = url.toString(); }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/listing">VPF</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/listing">Danh sách</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container py-3">
+      <header class="mb-3">
+        <h1 class="h5 mb-0">Danh sách trận đấu</h1>
+        <div class="text-muted small">Tổng <%= total %> trận</div>
+      </header>
+      <div class="card mb-3">
+        <div class="card-body">
+      <form class="row g-2 align-items-end" onsubmit="return false;">
+        <div class="col-auto">
+          <label for="season-picker" class="form-label">Giải đấu</label>
+          <select id="season-picker" class="form-select form-select-sm" onchange="onSeasonChange(this)">
+            <% seasons.forEach(function(s){ %>
+              <option value="<%= s.id %>" <%= s.id === selectedSeasonId ? 'selected' : '' %>><%= s.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label for="round-picker" class="form-label">Vòng</label>
+          <select id="round-picker" class="form-select form-select-sm" onchange="(function(sel){ const url=new URL(window.location.href); if(sel.value) url.searchParams.set('vong', sel.value); else url.searchParams.delete('vong'); url.searchParams.delete('page'); url.searchParams.delete('pageSize'); window.location.href=url.toString(); })(this)">
+            <option value="">Tất cả</option>
+            <% rounds.forEach(function(r){ %>
+              <option value="<%= r %>" <%= r === vongFilter ? 'selected' : '' %>><%= r %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label for="team-input" class="form-label">Đội</label>
+          <input id="team-input" type="text" class="form-control form-control-sm" value="<%= teamFilter || '' %>" />
+        </div>
+        <div class="col-auto d-flex align-items-end">
+          <button class="btn btn-sm btn-primary" onclick="(function(){ const url=new URL(window.location.href); const v=document.getElementById('team-input').value; if(v) url.searchParams.set('team', v); else url.searchParams.delete('team'); url.searchParams.delete('page'); url.searchParams.delete('pageSize'); window.location.href=url.toString(); })()">Lọc</button>
+        </div>
+        <div class="col-auto">
+          <label for="result-picker" class="form-label">Kết quả</label>
+          <select id="result-picker" class="form-select form-select-sm" onchange="(function(sel){ const url=new URL(window.location.href); if(sel.value) url.searchParams.set('result', sel.value); else url.searchParams.delete('result'); url.searchParams.delete('page'); url.searchParams.delete('pageSize'); window.location.href=url.toString(); })(this)">
+            <option value="">Tất cả</option>
+            <option value="has" <%= resultFilter==='has'?'selected':'' %>>Đã có</option>
+            <option value="none" <%= resultFilter==='none'?'selected':'' %>>Chưa có</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label for="var-picker" class="form-label">VAR</label>
+          <select id="var-picker" class="form-select form-select-sm" onchange="(function(sel){ const url=new URL(window.location.href); if(sel.value) url.searchParams.set('var', sel.value); else url.searchParams.delete('var'); url.searchParams.delete('page'); url.searchParams.delete('pageSize'); window.location.href=url.toString(); })(this)">
+            <option value="">Tất cả</option>
+            <option value="has" <%= varFilter==='has'?'selected':'' %>>Có</option>
+            <option value="none" <%= varFilter==='none'?'selected':'' %>>Không</option>
+          </select>
+        </div>
+        <div class="col-auto d-flex align-items-end">
+          <a href="/listing" class="btn btn-sm btn-outline-secondary">Reset</a>
+        </div>
+      </form>
+        </div>
+      </div>
+
+    <% roundNames.forEach(function(rname){ const items = groups[rname] || []; %>
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white"><%= rname %></div>
+        <div class="card-body p-0">
+        <div class="table-wrapper">
+          <div class="table-responsive">
+          <table class="table table-striped table-hover table-sm align-middle">
+          <colgroup>
+            <col style="width:15%" />
+            <col style="width:10%" />
+            <col style="width:15%" />
+            <col style="width:15%" />
+            <col style="width:15%" />
+            <col style="width:15%" />
+            <col style="width:15%" />
+          </colgroup>
+          <thead class="table-light">
+            <tr>
+              <th>Thời gian - Ngày</th>
+              <th class="text-center">Mã trận</th>
+              <th>SVĐ</th>
+              <th>Đội nhà</th>
+              <th class="text-center">Kết quả</th>
+              <th>Đội khách</th>
+              <th>Kênh TV</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% items.forEach(function(m){ const channels = String(m.kenhTv||'').split(/[,;/|]+/).map(c=>c.trim()).filter(c=>c.length>0); const contentStr = channels.map(c=>c.replace(/"/g,'&quot;')).join('<br />'); %>
+              <tr>
+                <td><%- formatThuNgayTime(m.thuNgay, m.gio) %></td>
+                <td class="text-center"><%= m.maTran || '' %></td>
+                <td><%= m.svd || '' %></td>
+                <td>
+                  <% if (m.logoDoiNha) { %>
+                    <img src="<%= m.logoDoiNha %>" alt="logo" width="22" style="margin-right:6px;vertical-align:middle"/>
+                  <% } %>
+                  <%= m.doiNha %>
+                </td>
+                <td class="text-center">
+                  <%= (m.ketQua && String(m.ketQua).trim().length) ? m.ketQua : 'Chưa có' %>
+                  <% if (m.hasVar) { %>
+                    <div class="var-badge"><img src="/img/var.png" alt="VAR" width="24" /></div>
+                  <% } %>
+                </td>
+                <td>
+                  <% if (m.logoDoiKhach) { %>
+                    <img src="<%= m.logoDoiKhach %>" alt="logo" width="22"/>
+                  <% } %>
+                  <%= m.doiKhach %>
+                </td>
+                <td>
+                  <% if (channels.length) { %>
+                    <span class="tv-badge" tabindex="0" data-bs-toggle="popover" data-bs-html="true" data-bs-content="<%- contentStr %>">
+                      <picture style="margin-right:6px;vertical-align:middle">
+                        <source srcset="/img/football-tv.png" type="image/png">
+                        <img src="/img/tv.svg" alt="TV" width="14" height="14" />
+                      </picture>
+                      Có <%= channels.length %> kênh phát sóng
+                    </span>
+                  <% } else { %>
+                    <span class="text-muted">Chưa có lịch phát sóng</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+          </table>
+          </div>
+        </div>
+        </div>
+      </div>
+    <% }) %>
+    </main>
+  </body>
+</html>
