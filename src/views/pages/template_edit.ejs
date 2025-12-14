@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar', { active: 'templates' }) %>
+    <main class="container py-3">
+      <header class="mb-3">
+        <h1 class="h5 mb-0">Sửa Template #<%= template.id %></h1>
+        <div class="text-muted small">Chỉnh sửa tên, mô tả và cấu hình JSON; test trước khi lưu.</div>
+      </header>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Tên template</label>
+              <input id="tpl-name" class="form-control form-control-sm" value="<%= template.name %>" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Mô tả</label>
+              <input id="tpl-desc" class="form-control form-control-sm" value="<%= template.description || '' %>" />
+            </div>
+            <div class="col-12">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label mb-0">Config JSON</label>
+                <a href="#" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#templateJsonHelpModal">Hướng dẫn Config JSON</a>
+              </div>
+              <textarea id="tpl-config" class="form-control" rows="14"><%= JSON.stringify(template.config, null, 2) %></textarea>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-sm btn-primary" id="btn-save-template">Lưu Template</button>
+            <button class="btn btn-sm btn-outline-danger" id="btn-delete-template">Xoá</button>
+            <button class="btn btn-sm btn-outline-secondary" id="btn-clone-template">Clone</button>
+            <a class="btn btn-sm btn-outline-secondary" href="/crawler">Quay lại Crawler</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Test Template</div>
+        <div class="card-body">
+          <div class="mb-2">
+            <label class="form-label">URL để test</label>
+            <input id="test-url" class="form-control form-control-sm" placeholder="https://vpf.vn/season/v-league-2026/?action=calendar&pagejs=1#" />
+          </div>
+          <button class="btn btn-sm btn-outline-primary" id="btn-test">Test</button>
+          <div class="mt-2">
+            <div class="small text-muted">Kết quả</div>
+            <pre id="test-output" class="bg-light p-2" style="max-height:280px;overflow:auto"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="modal fade" id="templateJsonHelpModal" tabindex="-1" aria-labelledby="templateJsonHelpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="templateJsonHelpLabel">Hướng dẫn tạo Config JSON</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-2">Cấu hình template gồm các phần: <code>fetch</code>, <code>select</code>, <code>transform</code>, <code>output</code>.</p>
+            <ul class="mb-3">
+              <li><strong>fetch</strong>: <code>dynamic</code> (bật headless), <code>waitSelector</code> (selector chờ), <code>headers</code>, <code>timeoutMs</code></li>
+              <li><strong>select.list</strong>: selector liệt kê phần tử dòng (ví dụ: <code>.js-matchday-matches .jstable-row</code>)</li>
+              <li><strong>select.fields</strong>: các trường cần lấy
+                <ul>
+                  <li><code>type: "text"|"html"|"attr"|"exists"</code></li>
+                  <li><code>attr.name</code> để chỉ định thuộc tính (ví dụ <code>src</code>)</li>
+                  <li><code>closestFind</code>: lấy từ ancestor theo <code>closest</code> + <code>selector</code></li>
+                  <li><code>prevOfClosest</code>: lấy phần tử đứng trước của ancestor</li>
+                  <li><code>closestCardHeader</code>: lấy tiêu đề card chứa dòng</li>
+                  <li><code>match</code>: biểu thức regex để trích xuất một phần từ text</li>
+                </ul>
+              </li>
+              <li><strong>transform</strong>: xử lý sau khi trích xuất
+                <ul>
+                  <li><code>kenhTv</code>: tách chuỗi kênh truyền hình theo regex <code>split</code></li>
+                  <li><code>gio.replace</code>: thay thế chuỗi giờ theo cặp [from, to]</li>
+                  <li><code>ketQua.defaultIfEmpty</code>: đặt giá trị mặc định nếu rỗng</li>
+                </ul>
+              </li>
+              <li><strong>output.schema</strong>: danh sách trường cần xuất ra theo thứ tự</li>
+            </ul>
+            <div class="mb-2"><strong>Ví dụ</strong></div>
+            <pre class="bg-light p-2" style="max-height:300px;overflow:auto">{\n  "fetch": {\n    "dynamic": true,\n    "waitSelector": ".jstable-row",\n    "timeoutMs": 60000\n  },\n  "select": {\n    "list": ".js-matchday-matches .jstable-row",\n    "fields": {\n      "svd": { "selector": ".jsMatchDivVenue", "type": "text" },\n      "doiNha": { "selector": ".jsMatchDivHome .js_div_particName a", "type": "text" },\n      "logoDoiNha": { "selector": ".jsMatchDivHomeEmbl img", "type": "attr", "name": "src" },\n      "ketQua": { "selector": ".jsMatchDivScore .jsScoreDiv", "type": "text" },\n      "doiKhach": { "selector": ".jsMatchDivAway .js_div_particName a", "type": "text" },\n      "logoDoiKhach": { "selector": ".jsMatchDivAwayEmbl img", "type": "attr", "name": "src" },\n      "kenhTvRaw": { "selector": ".jsChannelDiv", "type": "text" },\n      "gio": { "selector": ".jsMatchDivTime .jsDivLineEmbl", "type": "text" },\n      "vong": { "selector": ".jsrow-matchday-name", "type": "prevOfClosest", "closest": ".js-matchday-wrapper" }\n    }\n  },\n  "transform": {\n    "kenhTv": { "split": ",|;|/|\\\\|" },\n    "gio": { "replace": [["h", ":"], [" ", ""]] },\n    "ketQua": { "defaultIfEmpty": "-" }\n  },\n  "output": { "schema": ["svd", "doiNha", "doiKhach", "gio", "ketQua", "kenhTv"] }\n}</pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      async function postJSON(url, body) {
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+      }
+      async function patchJSON(url, body) {
+        const res = await fetch(url, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+      }
+      document.getElementById('btn-save-template').addEventListener('click', async function(){
+        try {
+          const name = document.getElementById('tpl-name').value;
+          const description = document.getElementById('tpl-desc').value;
+          const config = JSON.parse(document.getElementById('tpl-config').value || '{}');
+          const data = await patchJSON('/api/templates/<%= template.id %>', { name, description, config });
+          alert('Lưu template thành công');
+        } catch (e) {
+          alert('Lỗi: ' + String(e.message || e));
+        }
+      });
+      document.getElementById('btn-test').addEventListener('click', async function(){
+        try {
+          const url = document.getElementById('test-url').value;
+          const template = JSON.parse(document.getElementById('tpl-config').value || '{}');
+          const data = await postJSON('/api/templates/test', { url, template });
+          document.getElementById('test-output').textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          document.getElementById('test-output').textContent = String(e.message || e);
+        }
+      });
+      document.getElementById('btn-delete-template').addEventListener('click', async function(){
+        try {
+          const ok = await fetch('/api/templates/<%= template.id %>', { method: 'DELETE' }).then(r=>r.json());
+          if (ok.ok) { alert('Đã xoá'); window.location.href = '/crawler'; } else { alert('Xoá thất bại'); }
+        } catch (e) { alert('Lỗi: ' + String(e.message || e)); }
+      });
+      document.getElementById('btn-clone-template').addEventListener('click', async function(){
+        try {
+          const name = document.getElementById('tpl-name').value + ' (Clone)';
+          const description = document.getElementById('tpl-desc').value;
+          const config = JSON.parse(document.getElementById('tpl-config').value || '{}');
+          const data = await postJSON('/api/templates', { name, description, config });
+          alert('Đã clone: ID ' + data.template.id);
+        } catch (e) { alert('Lỗi: ' + String(e.message || e)); }
+      });
+    </script>
+  </body>
+</html>

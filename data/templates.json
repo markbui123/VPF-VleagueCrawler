@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1765595778527,
+    "name": "2026",
+    "description": "",
+    "config": {
+      "fetch": {
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        },
+        "timeoutMs": 20000,
+        "dynamic": true,
+        "waitSelector": ".jstable-row"
+      },
+      "select": {
+        "list": ".js-matchday-matches .jstable-row",
+        "fields": {
+          "maTran": {
+            "selector": ".js-ma-tran .jsDivLineEmbl",
+            "type": "text"
+          },
+          "svd": {
+            "selector": ".jsMatchDivVenue",
+            "type": "text"
+          },
+          "doiNha": {
+            "selector": ".jsMatchDivHome .js_div_particName a",
+            "type": "text"
+          },
+          "logoDoiNha": {
+            "selector": ".jsMatchDivHomeEmbl img",
+            "type": "attr",
+            "name": "src"
+          },
+          "ketQua": {
+            "selector": ".jsMatchDivScore .jsScoreDiv",
+            "type": "text"
+          },
+          "hasVar": {
+            "selector": ".jo-match-var img[src*=\"var.png\"]",
+            "type": "exists"
+          },
+          "doiKhach": {
+            "selector": ".jsMatchDivAway .js_div_particName a",
+            "type": "text"
+          },
+          "logoDoiKhach": {
+            "selector": ".jsMatchDivAwayEmbl img",
+            "type": "attr",
+            "name": "src"
+          },
+          "kenhTvRaw": {
+            "selector": ".jsChannelDiv",
+            "type": "text"
+          },
+          "gio": {
+            "selector": ".jsMatchDivTime .jsDivLineEmbl",
+            "type": "text"
+          },
+          "vong": {
+            "selector": ".jsrow-matchday-name",
+            "type": "prevOfClosest",
+            "closest": ".js-matchday-wrapper"
+          },
+          "thuNgay": {
+            "selector": ".js-matchday-title",
+            "type": "closestFind",
+            "closest": ".js-matchday-wrapper",
+            "html": false
+          }
+        }
+      },
+      "transform": {
+        "kenhTv": {
+          "split": ",|;|/|\\|",
+          "trim": true,
+          "filterEmpty": true
+        },
+        "gio": {
+          "replace": [
+            [
+              ":",
+              "h"
+            ]
+          ]
+        },
+        "ketQua": {
+          "defaultIfEmpty": "Chưa có tỷ số"
+        }
+      },
+      "output": {
+        "schema": [
+          "maTran",
+          "svd",
+          "doiNha",
+          "logoDoiNha",
+          "ketQua",
+          "hasVar",
+          "doiKhach",
+          "logoDoiKhach",
+          "kenhTv",
+          "thuNgay",
+          "gio",
+          "vong"
+        ],
+        "format": "json"
+      }
+    },
+    "isActive": true,
+    "createdAt": "2025-12-13T03:16:18.527Z"
+  },
+  {
+    "id": 1765597296767,
+    "name": "2026 - 02",
+    "description": "",
+    "config": {
+      "fetch": {
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        },
+        "timeoutMs": 20000,
+        "dynamic": true,
+        "waitSelector": ".jstable-row"
+      },
+      "select": {
+        "list": ".js-matchday-matches .jstable-row",
+        "fields": {
+          "maTran": {
+            "selector": ".js-ma-tran .jsDivLineEmbl",
+            "type": "text"
+          },
+          "svd": {
+            "selector": ".jsMatchDivVenue",
+            "type": "text"
+          },
+          "doiNha": {
+            "selector": ".jsMatchDivHome .js_div_particName a",
+            "type": "text"
+          },
+          "logoDoiNha": {
+            "selector": ".jsMatchDivHomeEmbl img",
+            "type": "attr",
+            "name": "src"
+          },
+          "ketQua": {
+            "selector": ".jsMatchDivScore .jsScoreDiv",
+            "type": "text"
+          },
+          "hasVar": {
+            "selector": ".jo-match-var img[src*=\"var.png\"]",
+            "type": "exists"
+          },
+          "doiKhach": {
+            "selector": ".jsMatchDivAway .js_div_particName a",
+            "type": "text"
+          },
+          "logoDoiKhach": {
+            "selector": ".jsMatchDivAwayEmbl img",
+            "type": "attr",
+            "name": "src"
+          },
+          "kenhTvRaw": {
+            "selector": ".jsChannelDiv",
+            "type": "text"
+          },
+          "gio": {
+            "selector": ".jsMatchDivTime .jsDivLineEmbl",
+            "type": "text"
+          },
+          "vong": {
+            "selector": ".jsrow-matchday-name",
+            "type": "prevOfClosest",
+            "closest": ".js-matchday-wrapper"
+          },
+          "thuNgay": {
+            "selector": ".js-matchday-title",
+            "type": "closestFind",
+            "closest": ".js-matchday-wrapper",
+            "html": false
+          }
+        }
+      },
+      "transform": {
+        "kenhTv": {
+          "split": ",|;|/|\\|",
+          "trim": true,
+          "filterEmpty": true
+        },
+        "gio": {
+          "replace": [
+            [
+              ":",
+              "h"
+            ]
+          ]
+        },
+        "ketQua": {
+          "defaultIfEmpty": "Chưa có tỷ số"
+        }
+      },
+      "output": {
+        "schema": [
+          "maTran",
+          "svd",
+          "doiNha",
+          "logoDoiNha",
+          "ketQua",
+          "hasVar",
+          "doiKhach",
+          "logoDoiKhach",
+          "kenhTv",
+          "thuNgay",
+          "gio",
+          "vong"
+        ],
+        "format": "json"
+      }
+    },
+    "isActive": true,
+    "createdAt": "2025-12-13T03:41:36.767Z"
+  }
+]

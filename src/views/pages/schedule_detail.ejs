@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar', { active: 'schedules' }) %>
+    <main class="container py-3">
+      <header class="mb-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h5 mb-0">Chi tiết Schedule</h1>
+          <div class="text-muted small">Xem và chỉnh sửa lịch, chạy ngay, xem kết quả</div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-outline-primary" id="btn-run-now">Run</button>
+          <button class="btn btn-sm btn-outline-secondary" id="btn-toggle">Toggle</button>
+          <button class="btn btn-sm btn-primary" id="btn-save">Save</button>
+        </div>
+      </header>
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">Thông tin lịch</div>
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-lg-6">
+                  <div class="mb-2"><label class="form-label">ID</label><input id="d-id" class="form-control form-control-sm" readonly /></div>
+                  <div class="mb-2"><label class="form-label">Tên</label><input id="d-name" class="form-control form-control-sm" /></div>
+                  <div class="mb-2"><label class="form-label">URL</label><input id="d-url" class="form-control form-control-sm" /></div>
+                  <div class="mb-2">
+                    <label class="form-label">Cron</label>
+                    <input id="d-cron" class="form-control form-control-sm" disabled />
+                    <div class="form-text">Bật “Chỉnh tay” để nhập cron tuỳ chỉnh hoặc dùng cấu hình nâng cao.</div>
+                    <div class="d-flex align-items-center gap-2 mt-1">
+                      <div class="form-check m-0">
+                        <input class="form-check-input" type="checkbox" id="d-cron-edit" />
+                        <label class="form-check-label" for="d-cron-edit">Chỉnh tay cron</label>
+                      </div>
+                      <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#dCronAdvModal">Cấu hình</a>
+                      <a href="#" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#cronHelpModal">Hướng dẫn cron</a>
+                    </div>
+                    <div class="small mt-2"><strong>Mô tả:</strong> <span id="d-cron-summary">Chưa cấu hình</span></div>
+                  </div>
+                  <div class="mb-2"><label class="form-label">Retain</label><input id="d-retain" type="number" class="form-control form-control-sm" /></div>
+                  <div class="mb-2">
+                    <label class="form-label me-3">Cấu hình JSON</label>
+                    <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="dMode" id="d-mode-template" value="template" /><label class="form-check-label" for="d-mode-template">Dùng template</label></div>
+                    <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="dMode" id="d-mode-custom" value="custom" /><label class="form-check-label" for="d-mode-custom">Custom JSON</label></div>
+                  </div>
+                  <div class="mb-2" id="d-tpl-select-wrap"><label class="form-label">Template</label><select id="d-templateId" class="form-select form-select-sm"></select></div>
+                  <div class="mb-2 d-none" id="d-tpl-json-wrap"><label class="form-label">Template JSON</label><textarea id="d-template" class="form-control" rows="10"></textarea></div>
+                  <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="d-active" /><label class="form-check-label" for="d-active">Active</label></div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="small text-muted">Output</div>
+                  <pre id="detail-output" class="bg-light p-2" style="height:100%;min-height:280px;max-height:480px;overflow:auto"></pre>
+                </div>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-12">
+                  <div class="d-flex align-items-center gap-3">
+                    <div><strong>Lần cào tiếp theo:</strong> <span id="next-run-time">—</span></div>
+                    <div><strong>Còn lại:</strong> <span id="next-run-countdown">—</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">Kết quả gần đây</div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0">
+                  <thead class="table-light"><tr><th>#</th><th>File</th><th>Ngày</th><th>Giờ</th><th>Count</th><th>Actions</th></tr></thead>
+                  <tbody id="results-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      async function getJSON(url){ const r=await fetch(url); if(!r.ok) throw new Error(await r.text()); return await r.json(); }
+      async function postJSON(url, body){ const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(!r.ok) throw new Error(await r.text()); return await r.json(); }
+      async function patchJSON(url, body){ const r=await fetch(url,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); if(!r.ok) throw new Error(await r.text()); return await r.json(); }
+      const scheduleId = <%= Number(scheduleId || 0) %>;
+      async function loadSchedule(){
+        const d = await getJSON('/api/schedules/'+scheduleId);
+        const s = d.schedule;
+        document.getElementById('d-id').value = s.id;
+        document.getElementById('d-name').value = s.name||'';
+        document.getElementById('d-url').value = s.url||'';
+        document.getElementById('d-cron').value = s.cron||'';
+        document.getElementById('d-retain').value = s.retainLimit||5;
+        document.getElementById('d-active').checked = !!s.isActive;
+        const mode = s.templateId ? 'template' : 'custom';
+        document.getElementById('d-mode-template').checked = mode==='template';
+        document.getElementById('d-mode-custom').checked = mode==='custom';
+        document.getElementById('d-tpl-select-wrap').classList.toggle('d-none', mode!=='template');
+        document.getElementById('d-tpl-json-wrap').classList.toggle('d-none', mode!=='custom');
+        document.getElementById('d-templateId').value = s.templateId || '';
+        document.getElementById('d-template').value = s.template ? JSON.stringify(s.template, null, 2) : '';
+      }
+      async function loadTemplates(){
+        const d = await getJSON('/api/templates');
+        const opts = ['<option value=\"\">-- Chọn template --</option>'].concat((d.items||[]).map(t=>'<option value=\"'+t.id+'\">'+t.name+'</option>')).join('');
+        document.getElementById('d-templateId').innerHTML = opts;
+      }
+      async function loadResults(){
+        const key = 'schedule-' + scheduleId;
+        const d = await getJSON('/api/run/results/'+encodeURIComponent(key)+'?limit=10');
+        const tbody = document.getElementById('results-tbody');
+        const items = (d.items||[]).slice().sort(function(a,b){
+          const ta = a.meta && a.meta.finishedAt ? a.meta.finishedAt : 0;
+          const tb = b.meta && b.meta.finishedAt ? b.meta.finishedAt : 0;
+          return ta - tb;
+        });
+        tbody.innerHTML = items.map(function(r, idx){
+          var dt = r.meta && r.meta.finishedAt ? new Date(r.meta.finishedAt) : null;
+          var day = dt ? dt.toLocaleDateString() : '';
+          var time = dt ? dt.toLocaleTimeString() : '';
+          var count = r.meta && typeof r.meta.count === 'number' ? r.meta.count : '';
+          return '<tr>'
+            + '<td>'+(idx+1)+'</td>'
+            + '<td>'+r.name+'</td>'
+            + '<td>'+day+'</td>'
+            + '<td>'+time+'</td>'
+            + '<td>'+count+'</td>'
+            + '<td>'
+            + '<button class="btn btn-sm btn-outline-secondary btn-view" data-name="'+r.name+'">View</button> '
+            + '<button class="btn btn-sm btn-outline-danger btn-delete" data-name="'+r.name+'">Delete</button>'
+            + '</td>'
+            + '</tr>';
+        }).join('');
+      }
+      document.getElementById('results-tbody').addEventListener('click', async function(e){
+        if (e.target.classList.contains('btn-view')){
+          const name = e.target.getAttribute('data-name');
+          const key = 'schedule-' + scheduleId;
+          const data = await getJSON('/api/run/results/'+encodeURIComponent(key)+'/'+encodeURIComponent(name));
+          document.getElementById('detail-output').textContent = JSON.stringify(data, null, 2);
+        } else if (e.target.classList.contains('btn-delete')){
+          const name = e.target.getAttribute('data-name');
+          const key = 'schedule-' + scheduleId;
+          try {
+            const res = await fetch('/api/run/results/'+encodeURIComponent(key)+'/'+encodeURIComponent(name), { method: 'DELETE' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadResults();
+          } catch (err) {
+            document.getElementById('detail-output').textContent = String(err.message || err);
+          }
+        }
+      });
+      document.getElementById('d-mode-template').addEventListener('change', function(){ document.getElementById('d-tpl-select-wrap').classList.remove('d-none'); document.getElementById('d-tpl-json-wrap').classList.add('d-none'); });
+      document.getElementById('d-mode-custom').addEventListener('change', function(){ document.getElementById('d-tpl-select-wrap').classList.add('d-none'); document.getElementById('d-tpl-json-wrap').classList.remove('d-none'); });
+      document.getElementById('btn-run-now').addEventListener('click', async function(){ try { const r = await postJSON('/api/schedules/'+scheduleId+'/run', {}); document.getElementById('detail-output').textContent = JSON.stringify(r, null, 2); await loadResults(); } catch(e){ document.getElementById('detail-output').textContent = String(e.message||e); } });
+      document.getElementById('btn-toggle').addEventListener('click', async function(){ try { const s = await getJSON('/api/schedules/'+scheduleId); const active = !!s.schedule.isActive; const r = await postJSON('/api/schedules/'+scheduleId+'/toggle', { active: !active }); document.getElementById('detail-output').textContent = JSON.stringify(r, null, 2); } catch(e){ document.getElementById('detail-output').textContent = String(e.message||e); } });
+      document.getElementById('btn-save').addEventListener('click', async function(){
+        const body = {
+          name: document.getElementById('d-name').value,
+          url: document.getElementById('d-url').value,
+          cron: document.getElementById('d-cron').value,
+          retainLimit: parseInt(document.getElementById('d-retain').value || '5', 10),
+          isActive: document.getElementById('d-active').checked
+        };
+        const mode = document.getElementById('d-mode-template').checked ? 'template' : 'custom';
+        if (mode==='template') {
+          body.templateId = document.getElementById('d-templateId').value || null;
+        } else {
+          try { body.template = JSON.parse(document.getElementById('d-template').value || '{}'); } catch(e){ document.getElementById('detail-output').textContent = 'Template JSON không hợp lệ'; return; }
+        }
+        try {
+          const r = await patchJSON('/api/schedules/'+scheduleId, body);
+          document.getElementById('detail-output').textContent = JSON.stringify(r, null, 2);
+          if (typeof updateDCronSummaryFromValue === 'function') updateDCronSummaryFromValue();
+          if (typeof startCountdown === 'function') startCountdown();
+        } catch(e){
+          document.getElementById('detail-output').textContent = String(e.message||e);
+        }
+      });
+      document.getElementById('d-cron-edit').addEventListener('change', function(){ document.getElementById('d-cron').disabled = !this.checked; });
+      function parseCronToDesc(cron){
+        const parts = String(cron||'').trim().split(/\s+/);
+        if (parts.length!==5) return 'Chưa cấu hình';
+        const [mm, hh, dd, mo, dw] = parts;
+        if (mm.startsWith('*/') && hh==='*' && dd==='*' && mo==='*' && dw==='*'){ return 'Mỗi ' + mm.slice(2) + ' phút'; }
+        if (mm==='0' && hh.startsWith('*/') && dd==='*' && mo==='*' && dw==='*'){ return 'Mỗi ' + hh.slice(2) + ' giờ'; }
+        if (dd==='*' && mo==='*' && dw==='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng ngày lúc ' + (String(hh).padStart(2,'0')) + ':' + (String(mm).padStart(2,'0')); }
+        if (dd==='*' && mo==='*' && dw!=='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng tuần ('+dw+') lúc ' + String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0'); }
+        if (dd!=='*' && mo==='*' && dw==='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng tháng ngày ' + dd + ' lúc ' + String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0'); }
+        return 'Cron: ' + cron;
+      }
+      function updateDCronSummaryFromValue(){ var v=document.getElementById('d-cron').value; document.getElementById('d-cron-summary').textContent=parseCronToDesc(v); }
+      function setDCronAndDesc(cron, desc){
+        if (cron) document.getElementById('d-cron').value = cron;
+        var s1 = document.getElementById('d-cron-summary'); if (s1) s1.textContent = desc || '';
+        var s2 = document.getElementById('d-cron-desc'); if (s2) s2.textContent = desc || '';
+      }
+      function updateDCronFromUI(mode){
+        if (mode==='min'){
+          const n = parseInt(document.getElementById('d-cron-n').value || '0', 10);
+          if (n>0) setDCronAndDesc('*/'+n+' * * * *', 'Mỗi '+n+' phút');
+        } else if (mode==='hour'){
+          const n = parseInt(document.getElementById('d-cron-n-hour').value || '0', 10);
+          if (n>0) setDCronAndDesc('0 */'+n+' * * *', 'Mỗi '+n+' giờ');
+        } else if (mode==='daily'){
+          const time = document.getElementById('d-cron-time').value || '07:00';
+          const parts = time.split(':'); setDCronAndDesc(parseInt(parts[1],10)+' '+parseInt(parts[0],10)+' * * *', 'Hằng ngày lúc '+time);
+        } else if (mode==='weekly'){
+          const time = document.getElementById('d-cron-time-week').value || '07:00';
+          const parts = time.split(':');
+          const selected = Array.from(document.querySelectorAll('.d-cron-dow:checked')).map(function(el){ return el.value; });
+          const list = selected.length ? selected.join(',') : '1';
+          const namesMap = { '0':'Chủ nhật','1':'Thứ 2','2':'Thứ 3','3':'Thứ 4','4':'Thứ 5','5':'Thứ 6','6':'Thứ 7' };
+          const names = selected.length ? selected.map(function(v){ return namesMap[v]; }).join(', ') : namesMap['1'];
+          setDCronAndDesc(parseInt(parts[1],10)+' '+parseInt(parts[0],10)+' * * '+list, 'Hằng tuần ('+names+') lúc '+time);
+        } else if (mode==='monthly'){
+          const daysStr = (document.getElementById('d-cron-days').value || '').trim();
+          const time = document.getElementById('d-cron-time-month').value || '07:00';
+          const parts = time.split(':');
+          const days = daysStr.split(',').map(function(s){ return parseInt(s.trim(),10); }).filter(function(n){ return !isNaN(n)&&n>=1&&n<=31; });
+          if (days.length>0) {
+            const list = Array.from(new Set(days)).sort(function(a,b){ return a-b; }).join(',');
+            setDCronAndDesc(parseInt(parts[1],10)+' '+parseInt(parts[0],10)+' '+list+' * *', 'Hằng tháng các ngày '+list+' lúc '+time);
+          }
+        } else if (mode==='preset'){
+          const v = document.getElementById('d-cron-preset').value || '';
+          if (v) { document.getElementById('d-cron').value = v; setDCronAndDesc(v, 'Theo preset'); }
+        }
+      }
+      ['d-cron-n','d-cron-n-hour','d-cron-time','d-cron-time-week','d-cron-days','d-cron-time-month','d-cron-preset'].forEach(function(id){
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('input', function(){
+          var activeTab = document.querySelector('#dCronTabs .nav-link.active');
+          var mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+          updateDCronFromUI(mode);
+        });
+      });
+      Array.from(document.querySelectorAll('.d-cron-dow')).forEach(function(el){
+        el.addEventListener('change', function(){
+          var activeTab = document.querySelector('#dCronTabs .nav-link.active');
+          var mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+          updateDCronFromUI(mode);
+        });
+      });
+      
+    </script>
+    <div class="modal fade" id="dCronAdvModal" tabindex="-1" aria-labelledby="dCronAdvLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dCronAdvLabel">Cấu hình Cron nâng cao</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-pills mb-2" id="dCronTabs">
+              <li class="nav-item"><button class="nav-link active" data-mode="min" type="button">Mỗi N phút</button></li>
+              <li class="nav-item"><button class="nav-link" data-mode="hour" type="button">Mỗi N giờ</button></li>
+              <li class="nav-item"><button class="nav-link" data-mode="daily" type="button">Hằng ngày</button></li>
+              <li class="nav-item"><button class="nav-link" data-mode="weekly" type="button">Hằng tuần</button></li>
+              <li class="nav-item"><button class="nav-link" data-mode="monthly" type="button">Hằng tháng (ngày cụ thể)</button></li>
+              <li class="nav-item"><button class="nav-link" data-mode="preset" type="button">Preset</button></li>
+            </ul>
+            <div id="dCronControls">
+              <div class="row g-2" data-mode="min">
+                <div class="col-6"><input id="d-cron-n" type="number" min="1" class="form-control form-control-sm" placeholder="N (phút)" /></div>
+              </div>
+              <div class="row g-2 d-none" data-mode="hour">
+                <div class="col-6"><input id="d-cron-n-hour" type="number" min="1" class="form-control form-control-sm" placeholder="N (giờ)" /></div>
+              </div>
+              <div class="row g-2 d-none" data-mode="daily">
+                <div class="col-6"><input id="d-cron-time" type="time" class="form-control form-control-sm" value="07:00" /></div>
+              </div>
+              <div class="row g-2 d-none" data-mode="weekly">
+                <div class="col-6"><input id="d-cron-time-week" type="time" class="form-control form-control-sm" value="07:00" /></div>
+                <div class="col-12 mt-1">
+                  <div class="d-flex flex-wrap gap-2">
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="1" id="d-dow-1" /><label class="form-check-label" for="d-dow-1">Thứ 2</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="2" id="d-dow-2" /><label class="form-check-label" for="d-dow-2">Thứ 3</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="3" id="d-dow-3" /><label class="form-check-label" for="d-dow-3">Thứ 4</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="4" id="d-dow-4" /><label class="form-check-label" for="d-dow-4">Thứ 5</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="5" id="d-dow-5" /><label class="form-check-label" for="d-dow-5">Thứ 6</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="6" id="d-dow-6" /><label class="form-check-label" for="d-dow-6">Thứ 7</label></div>
+                    <div class="form-check"><input class="form-check-input d-cron-dow" type="checkbox" value="0" id="d-dow-0" /><label class="form-check-label" for="d-dow-0">Chủ nhật</label></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-2 d-none" data-mode="monthly">
+                <div class="col-8"><input id="d-cron-days" class="form-control form-control-sm" placeholder="Ví dụ: 3,5,7" /></div>
+                <div class="col-4"><input id="d-cron-time-month" type="time" class="form-control form-control-sm" value="07:00" /></div>
+              </div>
+              <div class="row g-2 d-none" data-mode="preset">
+                <div class="col-12">
+                  <select id="d-cron-preset" class="form-select form-select-sm">
+                    <option value="">-- Chọn nhanh --</option>
+                    <option value="*/5 * * * *">Mỗi 5 phút</option>
+                    <option value="*/15 * * * *">Mỗi 15 phút</option>
+                    <option value="0 * * * *">Mỗi giờ</option>
+                    <option value="0 */2 * * *">Mỗi 2 giờ</option>
+                    <option value="0 7 * * *">Hằng ngày 07:00</option>
+                    <option value="0 19 * * *">Hằng ngày 19:00</option>
+                    <option value="0 7 * * 1">Hằng tuần Thứ 2 07:00</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 small"><strong>Mô tả:</strong> <span id="d-cron-desc">Chưa cấu hình</span></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="(function(){ var activeTab = document.querySelector('#dCronTabs .nav-link.active'); var mode = activeTab ? activeTab.getAttribute('data-mode') : 'min'; updateDCronFromUI(mode); updateDCronSummaryFromValue(); if (typeof startCountdown==='function') startCountdown(); })()">Áp dụng</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="cronHelpModal" tabindex="-1" aria-labelledby="cronHelpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cronHelpLabel">Hướng dẫn Cron</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-2">Cron gồm 5 trường: phút, giờ, ngày trong tháng, tháng, ngày trong tuần. Giao diện này sinh cron tự động theo chế độ.</p>
+            <ul>
+              <li><strong>Mỗi N phút</strong>: chọn N → <code>*/N * * * *</code></li>
+              <li><strong>Mỗi N giờ</strong>: chọn N → <code>0 */N * * *</code></li>
+              <li><strong>Hằng ngày</strong>: chọn giờ <code>HH:MM</code> → <code>MM HH * * *</code></li>
+              <li><strong>Hằng tuần</strong>: tick các ngày và giờ → <code>MM HH * * d1,d2,...</code> (Chủ nhật = <code>0</code>, Thứ 2–Thứ 7 = <code>1–6</code>)</li>
+              <li><strong>Hằng tháng</strong>: nhập ngày trong tháng và giờ → <code>MM HH D1,D2,... * *</code></li>
+              <li><strong>Preset</strong>: chọn nhanh các mẫu, có thể bật “Chỉnh tay cron” để nhập thủ công.</li>
+            </ul>
+            <p class="mt-3 mb-1"><strong>Ví dụ</strong></p>
+            <ul>
+              <li>Mỗi 15 phút: <code>*/15 * * * *</code></li>
+              <li>Mỗi 2 giờ: <code>0 */2 * * *</code></li>
+              <li>Hằng ngày 07:00: <code>0 7 * * *</code></li>
+              <li>Hằng tuần Thứ 4, Chủ nhật 19:00: <code>0 19 * * 3,0</code></li>
+              <li>Hằng tháng ngày 3,5,7 lúc 07:00: <code>0 7 3,5,7 * *</code></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function bindDCronModal(){
+        var modal = document.getElementById('dCronAdvModal');
+        if (!modal) return;
+        modal.addEventListener('shown.bs.modal', function(){
+          var v = document.getElementById('d-cron').value;
+          if (typeof parseCronToDesc === 'function') {
+            var el = document.getElementById('d-cron-desc'); if (el) el.textContent = parseCronToDesc(v);
+          }
+          if (modal.dataset.init === '1') return;
+          modal.dataset.init = '1';
+          var tabs = Array.from(document.querySelectorAll('#dCronTabs .nav-link'));
+          var sections = Array.from(document.querySelectorAll('#dCronControls [data-mode]'));
+          function showMode(mode){
+            tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-mode')===mode); });
+            sections.forEach(function(s){ s.classList.toggle('d-none', s.getAttribute('data-mode')!==mode); });
+            updateDCronFromUI(mode);
+            var el = document.getElementById('d-cron-desc'); if (el) el.textContent = parseCronToDesc(document.getElementById('d-cron').value);
+          }
+          tabs.forEach(function(t){ t.addEventListener('click', function(){ showMode(t.getAttribute('data-mode')); }); });
+          ['d-cron-n','d-cron-n-hour','d-cron-time','d-cron-time-week','d-cron-days','d-cron-time-month','d-cron-preset'].forEach(function(id){
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('input', function(){
+              var activeTab = document.querySelector('#dCronTabs .nav-link.active');
+              var mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+              updateDCronFromUI(mode);
+              var descEl = document.getElementById('d-cron-desc'); if (descEl) descEl.textContent = parseCronToDesc(document.getElementById('d-cron').value);
+            });
+          });
+          Array.from(document.querySelectorAll('.d-cron-dow')).forEach(function(el){
+            el.addEventListener('change', function(){
+              var activeTab = document.querySelector('#dCronTabs .nav-link.active');
+              var mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+              updateDCronFromUI(mode);
+              var descEl = document.getElementById('d-cron-desc'); if (descEl) descEl.textContent = parseCronToDesc(document.getElementById('d-cron').value);
+            });
+          });
+          showMode('min');
+        });
+      })();
+    </script>
+    <script>
+      function cronNextTime(cron, baseDate){
+        var parts = String(cron||'').trim().split(/\s+/);
+        if (parts.length !== 5) return null;
+        var now = baseDate ? new Date(baseDate) : new Date();
+        var mmS = parts[0], hhS = parts[1], ddS = parts[2], moS = parts[3], dwS = parts[4];
+        if (mmS.startsWith('*/') && hhS==='*' && ddS==='*' && moS==='*' && dwS==='*'){
+          var n = parseInt(mmS.slice(2),10); if (!n || n<1) return null;
+          var next = new Date(now); next.setSeconds(0,0);
+          var m = next.getMinutes(); var rem = m % n; var add = rem===0 ? n : (n - rem);
+          next.setMinutes(m + add); return next;
+        }
+        if (mmS==='0' && hhS.startsWith('*/') && ddS==='*' && moS==='*' && dwS==='*'){
+          var nh = parseInt(hhS.slice(2),10); if (!nh || nh<1) return null;
+          var ne = new Date(now); ne.setSeconds(0,0); ne.setMinutes(0);
+          var h = ne.getHours(); var r = h % nh; var ad = r===0 ? nh : (nh - r);
+          ne.setHours(h + ad); return ne;
+        }
+        if (ddS==='*' && moS==='*' && dwS==='*' && /^\d+$/.test(mmS) && /^\d+$/.test(hhS)){
+          var mm = parseInt(mmS,10), hh = parseInt(hhS,10);
+          var nx = new Date(now); nx.setSeconds(0,0); nx.setHours(hh, mm, 0, 0);
+          if (nx <= now) nx.setDate(nx.getDate()+1); return nx;
+        }
+        if (ddS==='*' && moS==='*' && dwS!=='*' && /^\d+$/.test(mmS) && /^\d+$/.test(hhS)){
+          var mm2 = parseInt(mmS,10), hh2 = parseInt(hhS,10);
+          var days = dwS.split(',').map(function(s){ return parseInt(s,10); }).filter(function(n){ return !isNaN(n)&&n>=0&&n<=6; });
+          if (!days.length) return null;
+          function dayAhead(date, targetDow){
+            var d = new Date(date); var cur = d.getDay(); var diff = targetDow - cur;
+            if (diff < 0 || (diff===0 && d <= date)) diff += 7; d.setDate(d.getDate()+diff); return d;
+          }
+          var best = null;
+          for (var i=0;i<days.length;i++){ var cand = dayAhead(now, days[i]); cand.setHours(hh2, mm2, 0, 0); if (!best || cand < best) best = cand; }
+          return best;
+        }
+        if (ddS!=='*' && moS==='*' && dwS==='*' && /^\d+$/.test(mmS) && /^\d+$/.test(hhS)){
+          var mm3 = parseInt(mmS,10), hh3 = parseInt(hhS,10);
+          var ds = ddS.split(',').map(function(s){ return parseInt(s,10); }).filter(function(n){ return !isNaN(n)&&n>=1&&n<=31; }).sort(function(a,b){ return a-b; });
+          if (!ds.length) return null;
+          var n2 = new Date(now); n2.setSeconds(0,0); n2.setHours(hh3, mm3, 0, 0);
+          for (var j=0;j<ds.length;j++){ var c = new Date(n2); c.setDate(ds[j]); if (c > now) return c; }
+          var c2 = new Date(n2); c2.setMonth(c2.getMonth()+1); c2.setDate(ds[0]); return c2;
+        }
+        return null;
+      }
+      var COUNTDOWN = { timer: null, syncTimer: null, lastCron: null, nextAt: null, lastActive: null };
+      async function startCountdown(){
+        try { if (COUNTDOWN.timer) clearInterval(COUNTDOWN.timer); } catch(_){}
+        try { if (COUNTDOWN.syncTimer) clearInterval(COUNTDOWN.syncTimer); } catch(_){}
+        let info;
+        try {
+          info = await getJSON('/api/schedules/'+scheduleId+'/next-run');
+        } catch (e) {
+          const isActive = !!document.getElementById('d-active').checked;
+          if (!isActive){
+            document.getElementById('next-run-time').textContent = 'Đang tắt';
+            document.getElementById('next-run-countdown').textContent = '—';
+            COUNTDOWN.nextAt = null; COUNTDOWN.lastCron = null; COUNTDOWN.lastActive = false;
+            return;
+          }
+          const cron = document.getElementById('d-cron').value;
+          COUNTDOWN.lastActive = true;
+          COUNTDOWN.lastCron = cron;
+          COUNTDOWN.nextAt = cronNextTime(cron, new Date());
+          if (!COUNTDOWN.nextAt){
+            document.getElementById('next-run-time').textContent = 'Cron không hợp lệ';
+            document.getElementById('next-run-countdown').textContent = '—';
+            return;
+          }
+          document.getElementById('next-run-time').textContent = COUNTDOWN.nextAt.toLocaleString();
+          function tickFallback(){
+            const now = new Date();
+            let ms = COUNTDOWN.nextAt - now;
+            if (ms <= 0){ COUNTDOWN.nextAt = cronNextTime(COUNTDOWN.lastCron, new Date()); ms = COUNTDOWN.nextAt ? (COUNTDOWN.nextAt - now) : 0; document.getElementById('next-run-time').textContent = COUNTDOWN.nextAt ? COUNTDOWN.nextAt.toLocaleString() : '—'; }
+            const sec = Math.floor(ms/1000), h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+            document.getElementById('next-run-countdown').textContent = (h>0?h+'h ':'')+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+          }
+          COUNTDOWN.timer = setInterval(tickFallback, 1000);
+          tickFallback();
+          return;
+        }
+        COUNTDOWN.lastActive = !!info.isActive;
+        COUNTDOWN.lastCron = info.cron || '';
+        if (!info.isActive) {
+          document.getElementById('next-run-time').textContent = 'Đang tắt';
+          document.getElementById('next-run-countdown').textContent = '—';
+          COUNTDOWN.nextAt = null;
+          return;
+        }
+        if (!info.nextAtISO) {
+          const cron = document.getElementById('d-cron').value;
+          COUNTDOWN.nextAt = cronNextTime(cron, new Date());
+          if (!COUNTDOWN.nextAt){
+            document.getElementById('next-run-time').textContent = 'Cron không hợp lệ';
+            document.getElementById('next-run-countdown').textContent = '—';
+            return;
+          }
+        } else {
+          COUNTDOWN.nextAt = new Date(info.nextAtISO);
+        }
+        document.getElementById('next-run-time').textContent = COUNTDOWN.nextAt.toLocaleString();
+        function tickLocal(){
+          const now = new Date();
+          let ms = COUNTDOWN.nextAt - now;
+          if (ms <= 0){
+            // khi về 0, đồng bộ lại từ server để lấy mốc kế tiếp
+            startCountdown(); return;
+          }
+          const sec = Math.floor(ms/1000), h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+          document.getElementById('next-run-countdown').textContent = (h>0?h+'h ':'')+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+        }
+        COUNTDOWN.timer = setInterval(tickLocal, 1000);
+        tickLocal();
+        COUNTDOWN.syncTimer = setInterval(async function(){
+          try {
+            var data = await getJSON('/api/schedules/'+scheduleId+'/next-run');
+            if (data && data.nextAtISO){
+              var newNext = new Date(data.nextAtISO);
+              // nếu server mốc khác xa (> 5s) thì cập nhật để tránh lệch
+              if (!COUNTDOWN.nextAt || Math.abs(newNext - COUNTDOWN.nextAt) > 5000){
+                COUNTDOWN.nextAt = newNext;
+                document.getElementById('next-run-time').textContent = COUNTDOWN.nextAt.toLocaleString();
+              }
+            }
+          } catch(_){}
+        }, 10000);
+      }
+      document.getElementById('d-cron').addEventListener('input', startCountdown);
+      document.getElementById('d-active').addEventListener('change', startCountdown);
+      (async function(){ await loadTemplates(); await loadSchedule(); await loadResults(); updateDCronSummaryFromValue(); startCountdown(); })();
+    </script>
+  </body>
+</html>

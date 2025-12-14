@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar', { active: 'templates' }) %>
+    <main class="container py-3">
+      <header class="mb-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h5 mb-0">Quản lý Templates</h1>
+          <div class="text-muted small">Tạo/sửa/xoá template, xem danh sách</div>
+        </div>
+        <a class="btn btn-sm btn-primary" href="/crawler/templates/new">New Template</a>
+      </header>
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped table-sm align-middle mb-0">
+              <thead class="table-light">
+                <tr><th>ID</th><th>Tên</th><th>Mô tả</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="tpl-tbody">
+                <% (templates || []).forEach(function(t){ %>
+                  <tr data-id="<%= t.id %>">
+                    <td><%= t.id %></td>
+                    <td><a href="/crawler/templates/<%= t.id %>"><%= t.name %></a></td>
+                    <td><%= t.description || '' %></td>
+                    <td class="d-flex gap-2">
+                      <a class="btn btn-sm btn-outline-secondary" href="/crawler/templates/<%= t.id %>">Edit</a>
+                      <button class="btn btn-sm btn-outline-danger btn-del">Delete</button>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      async function getJSON(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+      }
+      async function refresh(){
+        try {
+          const data = await getJSON('/api/templates');
+          const tbody = document.getElementById('tpl-tbody');
+          tbody.innerHTML = (data.items || []).map(function(t){
+            return '<tr data-id=\"'+t.id+'\">'
+              + '<td>'+t.id+'</td>'
+              + '<td><a href=\"/crawler/templates/'+t.id+'\">'+t.name+'</a></td>'
+              + '<td>'+(t.description || '')+'</td>'
+              + '<td class=\"d-flex gap-2\">'
+              + '<a class=\"btn btn-sm btn-outline-secondary\" href=\"/crawler/templates/'+t.id+'\">Edit</a>'
+              + '<button class=\"btn btn-sm btn-outline-danger btn-del\">Delete</button>'
+              + '</td>'
+              + '</tr>';
+          }).join('');
+        } catch (e) { console.error(e); }
+      }
+      document.getElementById('tpl-tbody').addEventListener('click', async function(e){
+        if (e.target.classList.contains('btn-del')) {
+          const tr = e.target.closest('tr');
+          const id = parseInt(tr.getAttribute('data-id'), 10);
+          try {
+            await fetch('/api/templates/'+id, { method: 'DELETE' });
+            await refresh();
+          } catch (err) { console.error(err); }
+        }
+      });
+    </script>
+  </body>
+</html>

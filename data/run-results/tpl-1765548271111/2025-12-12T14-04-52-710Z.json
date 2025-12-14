@@ -1,0 +1,1602 @@
+{
+  "items": [
+    {
+      "maTran": "1",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 615 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "2",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 716 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "3",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao"
+      ],
+      "thuNgay": "Thứ 716 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "4",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "0 - 3",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao"
+      ],
+      "thuNgay": "Chủ Nhật 17 Tháng 08, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "7",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "1 - 3",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Chủ Nhật 17 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "5",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Chủ Nhật 17 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "6",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Chủ Nhật 17 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "8",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "3 - 0",
+      "hasVar": true,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "VTV5",
+        "My TV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 622 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "9",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "0 - 1",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 723 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "10",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "4 - 0",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 723 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "11",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": false,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "My TV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 723 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "12",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "3 - 1",
+      "hasVar": true,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 723 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "14",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "0 - 0",
+      "hasVar": true,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 723 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "13",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "0 - 3",
+      "hasVar": true,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "My TV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 24 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "15",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "1 - 3",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 427 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "16",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "1 - 0",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 427 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "17",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 427 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "18",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "2 - 0",
+      "hasVar": true,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 427 Tháng 08, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "19",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "1 - 0",
+      "hasVar": true,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 528 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "20",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "4 - 2",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 528 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "21",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "2 - 0",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 730 Tháng 08, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "36",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [
+        "FPT Play"
+      ],
+      "thuNgay": "Thứ 713 Tháng 09, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "37",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "0 - 0",
+      "hasVar": true,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV1",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 713 Tháng 09, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "22",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 720 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "23",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "HTV 1",
+        "MyTV",
+        "TV 360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 720 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "24",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 720 Tháng 09, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "26",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+5"
+      ],
+      "thuNgay": "Chủ Nhật 21 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "27",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "1 - 3",
+      "hasVar": true,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 21 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "28",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "2 - 0",
+      "hasVar": true,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+4"
+      ],
+      "thuNgay": "Thứ 222 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "29",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+4"
+      ],
+      "thuNgay": "Thứ 626 Tháng 09, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "30",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "2 - 3",
+      "hasVar": true,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 727 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "31",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "1 - 2",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+5"
+      ],
+      "thuNgay": "Thứ 727 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "32",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "0 - 0",
+      "hasVar": true,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 727 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "33",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+4"
+      ],
+      "thuNgay": "Chủ Nhật 28 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "34",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "0 - 2",
+      "hasVar": true,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Key",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 28 Tháng 09, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "35",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "2 - 0",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV7",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 28 Tháng 09, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "38",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "0 - 2",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 401 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "39",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 502 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "40",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 502 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "42",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 603 Tháng 10, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "41",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 603 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "43",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 718 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "44",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "1 - 2",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 718 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "45",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "1 - 2",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 718 Tháng 10, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "46",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Chủ Nhật 19 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "47",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "3 - 0",
+      "hasVar": true,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+10"
+      ],
+      "thuNgay": "Chủ Nhật 19 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "48",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "0 - 0",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "HTV thể thao",
+        "MyTV",
+        "SCTV",
+        "TV360"
+      ],
+      "thuNgay": "Chủ Nhật 19 Tháng 10, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "49",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+4"
+      ],
+      "thuNgay": "Thứ 220 Tháng 10, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "50",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "1 - 3",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 725 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "51",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "2 - 3",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV1",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 725 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "52",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Chủ Nhật 26 Tháng 10, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "53",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 26 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "54",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "0 - 1",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+10"
+      ],
+      "thuNgay": "Chủ Nhật 26 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "55",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+4"
+      ],
+      "thuNgay": "Thứ 227 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "56",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "1 - 0",
+      "hasVar": true,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 227 Tháng 10, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "57",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 631 Tháng 10, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "58",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+9"
+      ],
+      "thuNgay": "Thứ 631 Tháng 10, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "59",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "2 - 0",
+      "hasVar": true,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+10"
+      ],
+      "thuNgay": "Thứ 631 Tháng 10, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "60",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV7",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 701 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "61",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+9"
+      ],
+      "thuNgay": "Thứ 701 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "62",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "1 - 2",
+      "hasVar": true,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 701 Tháng 11, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "63",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "0 - 1",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV3",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 02 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "64",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "1 - 0",
+      "hasVar": true,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+10"
+      ],
+      "thuNgay": "Thứ 304 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "65",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "4 - 0",
+      "hasVar": true,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Thứ 304 Tháng 11, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "67",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "1 - 0",
+      "hasVar": true,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 405 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "66",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [
+        "FPTPlay",
+        "HTV1",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 405 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "68",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "0 - 1",
+      "hasVar": true,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 405 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "72",
+      "svd": "SVĐ PVF",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "2 - 2",
+      "hasVar": true,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV 360+9"
+      ],
+      "thuNgay": "Thứ 708 Tháng 11, 2025",
+      "gio": "19h00",
+      "vong": ""
+    },
+    {
+      "maTran": "71",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+11"
+      ],
+      "thuNgay": "Chủ Nhật 09 Tháng 11, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "73",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "2 - 1",
+      "hasVar": true,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+9"
+      ],
+      "thuNgay": "Chủ Nhật 09 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "74",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "3 - 1",
+      "hasVar": true,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Chủ Nhật 09 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "75",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "3 - 4",
+      "hasVar": true,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "HTV thể thao",
+        "MyTV",
+        "SCTV",
+        "TV360"
+      ],
+      "thuNgay": "Chủ Nhật 09 Tháng 11, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "76",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "1 - 1",
+      "hasVar": true,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "VTV5",
+        "HTV Thể thao",
+        "MyTV",
+        "TV360",
+        "SCTV"
+      ],
+      "thuNgay": "Thứ 210 Tháng 11, 2025",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "77",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "3 - 0",
+      "hasVar": true,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [
+        "FPT Play",
+        "TV360+4"
+      ],
+      "thuNgay": "Thứ 210 Tháng 11, 2025",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "25",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 518 Tháng 12, 2025",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "78",
+      "svd": "SVĐ Hà Tĩnh",
+      "doiNha": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Becamex TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 630 Tháng 01, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "79",
+      "svd": "SVĐ Vinh",
+      "doiNha": "Sông Lam Nghệ An",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 731 Tháng 01, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "80",
+      "svd": "SVĐ Lạch Tray",
+      "doiNha": "Hải Phòng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Thể Công – Viettel",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 731 Tháng 01, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "81",
+      "svd": "SVĐ Pleiku",
+      "doiNha": "Hoàng Anh Gia Lai",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "SHB Đà Nẵng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 01 Tháng 02, 2026",
+      "gio": "17h00",
+      "vong": ""
+    },
+    {
+      "maTran": "82",
+      "svd": "Thông báo sau",
+      "doiNha": "PVF-CAND",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Công an TP. Hồ Chí Minh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 01 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "83",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 01 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "84",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Công an Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Ninh Bình",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 01 Tháng 02, 2026",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "85",
+      "svd": "SVĐ Ninh Bình",
+      "doiNha": "Ninh Bình",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2019/01/ninh_binh_2025-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Hoàng Anh Gia Lai",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-HAGL-150x150.jpg",
+      "kenhTv": [],
+      "thuNgay": "Thứ 707 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "86",
+      "svd": "SVĐ Hàng Đẫy",
+      "doiNha": "Hà Nội",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/HNFC-6-sao-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Hải Phòng",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/haiphongfc-150x150.jpg",
+      "kenhTv": [],
+      "thuNgay": "Thứ 707 Tháng 02, 2026",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "87",
+      "svd": "SVĐ Bình Dương",
+      "doiNha": "Becamex TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/LOGO-BECAMEX-TP-HCM-FC-NEW-01-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "PVF-CAND",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2025/08/PVF-CAND-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 08 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "88",
+      "svd": "SVĐ Mỹ Đình",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Sông Lam Nghệ An",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/SLNA-1-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 08 Tháng 02, 2026",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "89",
+      "svd": "SVĐ Thống Nhất",
+      "doiNha": "Công an TP. Hồ Chí Minh",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/CAHCM-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Đông Á Thanh Hóa",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Chủ Nhật 08 Tháng 02, 2026",
+      "gio": "19h15",
+      "vong": ""
+    },
+    {
+      "maTran": "90",
+      "svd": "SVĐ Thiên Trường",
+      "doiNha": "Thép Xanh Nam Định",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Hồng Lĩnh Hà Tĩnh",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/HLHT-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 209 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "91",
+      "svd": "SVĐ Hòa Xuân",
+      "doiNha": "SHB Đà Nẵng",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/shb-da-nang-2021-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 209 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "69",
+      "svd": "SVĐ Thanh Hóa",
+      "doiNha": "Đông Á Thanh Hóa",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/Logo-Thanh-Hoa-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Công an Hà Nội",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/cong-an-ha-noi-fc-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 324 Tháng 02, 2026",
+      "gio": "18h00",
+      "vong": ""
+    },
+    {
+      "maTran": "70",
+      "svd": "SVĐ Mỹ Đình",
+      "doiNha": "Thể Công – Viettel",
+      "logoDoiNha": "https://vpf.vn/wp-content/uploads/2018/10/TCVT-150x150.png",
+      "ketQua": "v",
+      "hasVar": false,
+      "doiKhach": "Thép Xanh Nam Định",
+      "logoDoiKhach": "https://vpf.vn/wp-content/uploads/2018/10/Logo-TXND-3-sao-150x150.png",
+      "kenhTv": [],
+      "thuNgay": "Thứ 324 Tháng 02, 2026",
+      "gio": "19h15",
+      "vong": ""
+    }
+  ],
+  "meta": {
+    "count": 91,
+    "url": "https://vpf.vn/season/v-league-2026/?action=calendar&pagejs=1",
+    "templateKey": "tpl-1765548271111"
+  }
+}

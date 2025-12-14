@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar', { active: 'templates' }) %>
+    <main class="container py-3">
+      <header class="mb-3">
+        <h1 class="h5 mb-0">Tạo Template mới</h1>
+        <div class="text-muted small">Nhập tên, mô tả và cấu hình JSON. Có thể test trước với URL.</div>
+      </header>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Tên template</label>
+              <input id="tpl-name" class="form-control form-control-sm" placeholder="Template V-League" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Mô tả</label>
+              <input id="tpl-desc" class="form-control form-control-sm" placeholder="Dùng cho trang listing" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Config JSON</label>
+              <textarea id="tpl-config" class="form-control" rows="14"></textarea>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-sm btn-primary" id="btn-create-template">Lưu Template</button>
+            <a class="btn btn-sm btn-outline-secondary" href="/crawler">Quay lại Crawler</a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">Test Template</div>
+        <div class="card-body">
+          <div class="mb-2">
+            <label class="form-label">URL để test</label>
+            <input id="test-url" class="form-control form-control-sm" placeholder="http://localhost:3000/listing" />
+          </div>
+          <button class="btn btn-sm btn-outline-primary" id="btn-test">Test</button>
+          <div class="mt-2">
+            <div class="small text-muted">Kết quả</div>
+            <pre id="test-output" class="bg-light p-2" style="max-height:280px;overflow:auto"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const sampleConfig = {
+        fetch: { headers: { 'User-Agent': 'Mozilla/5.0' }, timeoutMs: 20000, dynamic: true, waitSelector: '.jstable-row' },
+        select: {
+          list: '.js-matchday-matches .jstable-row',
+          fields: {
+            maTran: { selector: '.js-ma-tran .jsDivLineEmbl', type: 'text' },
+            svd: { selector: '.jsMatchDivVenue', type: 'text' },
+            doiNha: { selector: '.jsMatchDivHome .js_div_particName a', type: 'text' },
+            logoDoiNha: { selector: '.jsMatchDivHomeEmbl img', type: 'attr', name: 'src' },
+            ketQua: { selector: '.jsMatchDivScore .jsScoreDiv', type: 'text' },
+            hasVar: { selector: '.jo-match-var img[src*="var.png"]', type: 'exists' },
+            doiKhach: { selector: '.jsMatchDivAway .js_div_particName a', type: 'text' },
+            logoDoiKhach: { selector: '.jsMatchDivAwayEmbl img', type: 'attr', name: 'src' },
+            kenhTvRaw: { selector: '.jsChannelDiv', type: 'text' },
+            gio: { selector: '.jsMatchDivTime .jsDivLineEmbl', type: 'text' },
+            vong: { selector: '.jsrow-matchday-name', type: 'prevOfClosest', closest: '.js-matchday-wrapper' },
+            thuNgay: { selector: '.js-matchday-title', type: 'closestFind', closest: '.js-matchday-wrapper', html: false }
+          }
+        },
+        transform: {
+          kenhTv: { split: ',|;|/|\\|', trim: true, filterEmpty: true },
+          gio: { replace: [[":", "h"]] },
+          ketQua: { defaultIfEmpty: 'Chưa có tỷ số' }
+        },
+        output: {
+          schema: ['maTran','svd','doiNha','logoDoiNha','ketQua','hasVar','doiKhach','logoDoiKhach','kenhTv','thuNgay','gio','vong'],
+          format: 'json'
+        }
+      };
+      document.getElementById('tpl-config').value = JSON.stringify(sampleConfig, null, 2);
+      async function postJSON(url, body) {
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+      }
+      document.getElementById('btn-create-template').addEventListener('click', async function(){
+        try {
+          const name = document.getElementById('tpl-name').value;
+          const description = document.getElementById('tpl-desc').value;
+          const config = JSON.parse(document.getElementById('tpl-config').value || '{}');
+          const data = await postJSON('/api/templates', { name, description, config });
+          alert('Tạo template thành công: ID ' + data.template.id);
+        } catch (e) {
+          alert('Lỗi: ' + String(e.message || e));
+        }
+      });
+      document.getElementById('btn-test').addEventListener('click', async function(){
+        try {
+          const url = document.getElementById('test-url').value;
+          const template = JSON.parse(document.getElementById('tpl-config').value || '{}');
+          const data = await postJSON('/api/templates/test', { url, template });
+          document.getElementById('test-output').textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          document.getElementById('test-output').textContent = String(e.message || e);
+        }
+      });
+    </script>
+  </body>
+</html>

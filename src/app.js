@@ -9,6 +9,7 @@ const { registerListingRoute } = require('./routes/listing');
  */
 function createApp() {
   const app = express();
+  app.use(express.json());
   app.set('view engine', 'ejs');
   app.set('views', path.join(__dirname, 'views'));
   app.use(express.static('public'));
@@ -21,6 +22,24 @@ function createApp() {
   const prisma = new PrismaClient();
 
   registerListingRoute(app, prisma);
+  try {
+    const { registerApiRoutes } = require('./routes/api');
+    registerApiRoutes(app, prisma);
+  } catch (e) {
+    console.error('API routes init failed:', e.message);
+  }
+  try {
+    const { registerCrawlerRoute } = require('./routes/crawler');
+    registerCrawlerRoute(app);
+  } catch (e) {
+    console.error('Crawler route init failed:', e.message);
+  }
+  try {
+    const { initJobs } = require('./services/schedules');
+    initJobs();
+  } catch (e) {
+    console.error('Schedule jobs init failed:', e.message);
+  }
 
   process.on('SIGINT', async () => { await prisma.$disconnect(); process.exit(0); });
   return app;

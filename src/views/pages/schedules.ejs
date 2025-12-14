@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/navbar', { active: 'schedules' }) %>
+    <main class="container py-3">
+      <header class="mb-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="h5 mb-0">Lịch cào (Schedules)</h1>
+          <div class="text-muted small">Tạo lịch chạy theo template/JSON, cron và giữ số bản ghi</div>
+        </div>
+        <button class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" data-bs-target="#newScheduleOffcanvas">Tạo lịch mới</button>
+      </header>
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span>Danh sách schedules</span>
+              <button class="btn btn-sm btn-outline-secondary" id="btn-refresh-s">Refresh</button>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm align-middle mb-0">
+                  <thead class="table-light">
+                    <tr><th>ID</th><th>Tên</th><th>Cron</th><th>On</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody id="s-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      async function postJSON(url, body) { const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (!r.ok) throw new Error(await r.text()); return await r.json(); }
+      async function patchJSON(url, body) { const r = await fetch(url, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (!r.ok) throw new Error(await r.text()); return await r.json(); }
+      async function getJSON(url) { const r = await fetch(url); if (!r.ok) throw new Error(await r.text()); return await r.json(); }
+      async function refreshSchedules(){
+        const d = await getJSON('/api/schedules');
+        const tbody = document.getElementById('s-tbody');
+        tbody.innerHTML = (d.items||[]).map(function(s){
+          return '<tr class="table-row" style="cursor:pointer" data-id="'+s.id+'">'
+            + '<td>'+s.id+'</td>'
+            + '<td><a class="s-view" href="/crawler/schedules/'+s.id+'">'+s.name+'</a></td>'
+            + '<td>'+(s.cron||'')+'</td>'
+            + '<td><span class="badge '+(s.isActive?'bg-success':'bg-secondary')+'">'+(s.isActive?'On':'Off')+'</span></td>'
+            + '<td class="d-flex gap-2">'
+            + '<button class="btn btn-sm btn-outline-primary btn-run">Run</button>'
+            + '<button class="btn btn-sm btn-outline-warning btn-toggle">'+(s.isActive?'Tắt':'Bật')+'</button>'
+            + '<button class="btn btn-sm btn-outline-danger btn-del">Delete</button>'
+            + '</td>'
+            + '</tr>';
+        }).join('');
+      }
+      document.getElementById('btn-refresh-s').addEventListener('click', refreshSchedules);
+      document.getElementById('s-tbody').addEventListener('click', function(e){
+        const tr = e.target.closest('tr'); if (!tr) return;
+        const id = parseInt(tr.getAttribute('data-id'),10);
+        if (e.target.classList.contains('btn-run')){
+          postJSON('/api/schedules/'+id+'/run', {}).then(function(r){ alert('Started: '+r.jobId); }).catch(function(err){ alert(String(err.message||err)); });
+        } else if (e.target.classList.contains('btn-toggle')){
+          const badge = tr.querySelector('.badge'); const active = badge && badge.textContent.trim()==='On';
+          postJSON('/api/schedules/'+id+'/toggle', { active: !active }).then(function(){ refreshSchedules(); }).catch(function(err){ console.error(err); });
+        } else if (e.target.classList.contains('btn-del')){
+          fetch('/api/schedules/'+id, { method: 'DELETE' }).then(function(){ refreshSchedules(); }).catch(function(err){ console.error(err); });
+        }
+      });
+      (async function init(){ await refreshSchedules(); })();
+    </script>
+    <div class="modal fade" id="cronHelpModal" tabindex="-1" aria-labelledby="cronHelpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cronHelpLabel">Hướng dẫn Cron</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-2">Cron gồm 5 trường: phút, giờ, ngày trong tháng, tháng, ngày trong tuần. Giao diện này sinh cron tự động theo chế độ.</p>
+            <ul>
+              <li><strong>Mỗi N phút</strong>: chọn N → <code>*/N * * * *</code></li>
+              <li><strong>Mỗi N giờ</strong>: chọn N → <code>0 */N * * *</code></li>
+              <li><strong>Hằng ngày</strong>: chọn giờ <code>HH:MM</code> → <code>MM HH * * *</code></li>
+              <li><strong>Hằng tuần</strong>: tick các ngày và giờ → <code>MM HH * * d1,d2,...</code> (Chủ nhật = <code>0</code>, Thứ 2–Thứ 7 = <code>1–6</code>)</li>
+              <li><strong>Hằng tháng</strong>: nhập ngày trong tháng và giờ → <code>MM HH D1,D2,... * *</code></li>
+              <li><strong>Preset</strong>: chọn nhanh các mẫu, có thể bật “Chỉnh tay cron” để nhập thủ công.</li>
+            </ul>
+            <p class="mt-3 mb-1"><strong>Ví dụ</strong></p>
+            <ul>
+              <li>Mỗi 15 phút: <code>*/15 * * * *</code></li>
+              <li>Mỗi 2 giờ: <code>0 */2 * * *</code></li>
+              <li>Hằng ngày 07:00: <code>0 7 * * *</code></li>
+              <li>Hằng tuần Thứ 4, Chủ nhật 19:00: <code>0 19 * * 3,0</code></li>
+              <li>Hằng tháng ngày 3,5,7 lúc 07:00: <code>0 7 3,5,7 * *</code></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+<div class="offcanvas offcanvas-end" tabindex="-1" id="newScheduleOffcanvas" aria-labelledby="newScheduleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="newScheduleLabel">Tạo lịch mới</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="mb-2">
+      <label class="form-label">Tên</label>
+      <input id="ns-name" class="form-control form-control-sm" placeholder="Lịch VPF 2026" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label">URL</label>
+      <input id="ns-url" class="form-control form-control-sm" placeholder="https://vpf.vn/season/v-league-2026/?action=calendar&pagejs=1#" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label">Cron</label>
+      <input id="ns-cron" class="form-control form-control-sm" placeholder="0 */2 * * *" disabled />
+      <div class="form-text">Tự động sinh từ cấu hình bên dưới. Bật “Chỉnh tay” để nhập cron tuỳ chỉnh.</div>
+      <div class="form-check mt-1">
+        <input class="form-check-input" type="checkbox" id="ns-cron-edit" />
+        <label class="form-check-label" for="ns-cron-edit">Chỉnh tay cron</label>
+      </div>
+      <div class="small mt-2"><strong>Mô tả:</strong> <span id="ns-cron-summary">Chưa cấu hình</span></div>
+    </div>
+    <div class="mb-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <label class="form-label mb-0">Lịch chạy nâng cao</label>
+        <div class="d-flex gap-2">
+          <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#nsCronAdvModal">Cấu hình</a>
+          <a href="#" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#cronHelpModal">Hướng dẫn cron</a>
+        </div>
+      </div>
+      <div class="mt-2 small"><strong>Cấu hình:</strong> dùng nút “Cấu hình” để mở cron nâng cao</div>
+    </div>
+    <div class="mb-2">
+      <label class="form-label">Retain</label>
+      <input id="ns-retain" type="number" class="form-control form-control-sm" value="5" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label me-3">Cấu hình JSON</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="nsMode" id="ns-mode-template" value="template" checked />
+        <label class="form-check-label" for="ns-mode-template">Dùng template</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="nsMode" id="ns-mode-custom" value="custom" />
+        <label class="form-check-label" for="ns-mode-custom">Custom JSON</label>
+      </div>
+    </div>
+    <div class="mb-2" id="ns-tpl-select-wrap">
+      <label class="form-label">Template</label>
+      <select id="ns-templateId" class="form-select form-select-sm"></select>
+    </div>
+    <div class="mb-2 d-none" id="ns-tpl-json-wrap">
+      <label class="form-label">Template JSON</label>
+      <textarea id="ns-template" class="form-control" rows="8"></textarea>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="ns-active" />
+      <label class="form-check-label" for="ns-active">Active</label>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm btn-primary" id="btn-create-ns">Create</button>
+      <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="offcanvas">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('ns-mode-template').addEventListener('change', function(){ document.getElementById('ns-tpl-select-wrap').classList.remove('d-none'); document.getElementById('ns-tpl-json-wrap').classList.add('d-none'); });
+  document.getElementById('ns-mode-custom').addEventListener('change', function(){ document.getElementById('ns-tpl-select-wrap').classList.add('d-none'); document.getElementById('ns-tpl-json-wrap').classList.remove('d-none'); });
+  document.getElementById('btn-create-ns').addEventListener('click', async function(){
+    const name = document.getElementById('ns-name').value;
+    const url = document.getElementById('ns-url').value;
+    const cron = document.getElementById('ns-cron').value;
+    const retainLimit = parseInt(document.getElementById('ns-retain').value || '5', 10);
+    const isActive = document.getElementById('ns-active').checked;
+    const mode = document.getElementById('ns-mode-template').checked ? 'template' : 'custom';
+    const body = { name, url, cron, retainLimit, isActive };
+    if (mode === 'template') {
+      body.templateId = document.getElementById('ns-templateId').value || null;
+    } else {
+      try { body.template = JSON.parse(document.getElementById('ns-template').value || '{}'); } catch(e){ alert('Template JSON không hợp lệ'); return; }
+    }
+    try { await fetch('/api/schedules', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); await refreshSchedules(); alert('Created'); } catch(e){ alert(String(e.message||e)); }
+  });
+  (async function initNs(){ const d = await getJSON('/api/templates'); const opts = ['<option value=\"\">-- Chọn template --</option>'].concat((d.items||[]).map(t=>'<option value=\"'+t.id+'\">'+t.name+'</option>')).join(''); document.getElementById('ns-templateId').innerHTML = opts; updateNsCronSummaryFromValue(); })();
+  // Offcanvas cron builder
+  document.getElementById('ns-cron-edit').addEventListener('change', function(){ document.getElementById('ns-cron').disabled = !this.checked; });
+  function parseCronToDesc(cron){
+    const parts = String(cron||'').trim().split(/\s+/);
+    if (parts.length!==5) return 'Chưa cấu hình';
+    const [mm, hh, dd, mo, dw] = parts;
+    if (mm.startsWith('*/') && hh==='*' && dd==='*' && mo==='*' && dw==='*'){ return 'Mỗi ' + mm.slice(2) + ' phút'; }
+    if (mm==='0' && hh.startsWith('*/') && dd==='*' && mo==='*' && dw==='*'){ return 'Mỗi ' + hh.slice(2) + ' giờ'; }
+    if (dd==='*' && mo==='*' && dw==='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng ngày lúc ' + (String(hh).padStart(2,'0')) + ':' + (String(mm).padStart(2,'0')); }
+    if (dd==='*' && mo==='*' && dw!=='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng tuần ('+dw+') lúc ' + String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0'); }
+    if (dd!=='*' && mo==='*' && dw==='*' && mm.match(/^\d+$/) && hh.match(/^\d+$/)){ return 'Hằng tháng ngày ' + dd + ' lúc ' + String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0'); }
+    return 'Cron: ' + cron;
+  }
+  function updateNsCronSummaryFromValue(){ const v = document.getElementById('ns-cron').value; document.getElementById('ns-cron-summary').textContent = parseCronToDesc(v); }
+  function setNsCronAndDesc(cron, desc){ if (cron) document.getElementById('ns-cron').value = cron; document.getElementById('ns-cron-desc').textContent = desc || ''; }
+  function updateNsCronFromUI(mode){
+    if (mode==='min'){
+      const n = parseInt(document.getElementById('ns-cron-n').value || '0', 10);
+      if (n>0) setNsCronAndDesc(`*/${n} * * * *`, `Mỗi ${n} phút`);
+    } else if (mode==='hour'){
+      const n = parseInt(document.getElementById('ns-cron-n-hour').value || '0', 10);
+      if (n>0) setNsCronAndDesc(`0 */${n} * * *`, `Mỗi ${n} giờ`);
+    } else if (mode==='daily'){
+      const time = document.getElementById('ns-cron-time').value || '07:00';
+      const [hh, mm] = time.split(':'); setNsCronAndDesc(`${parseInt(mm,10)} ${parseInt(hh,10)} * * *`, `Hằng ngày lúc ${time}`);
+    } else if (mode==='weekly'){
+      const time = document.getElementById('ns-cron-time-week').value || '07:00';
+      const [hh, mm] = time.split(':');
+      const selected = Array.from(document.querySelectorAll('.ns-cron-dow:checked')).map(el => el.value);
+      const list = selected.length ? selected.join(',') : '1';
+      const dowNamesMap = { '0':'Chủ nhật','1':'Thứ 2','2':'Thứ 3','3':'Thứ 4','4':'Thứ 5','5':'Thứ 6','6':'Thứ 7' };
+      const names = selected.length ? selected.map(v => dowNamesMap[v]).join(', ') : dowNamesMap['1'];
+      setNsCronAndDesc(`${parseInt(mm,10)} ${parseInt(hh,10)} * * ${list}`, `Hằng tuần (${names}) lúc ${time}`);
+    } else if (mode==='monthly'){
+      const daysStr = (document.getElementById('ns-cron-days').value || '').trim();
+      const time = document.getElementById('ns-cron-time-month').value || '07:00';
+      const [hh, mm] = time.split(':');
+      const days = daysStr.split(',').map(s=>parseInt(s.trim(),10)).filter(n=>!isNaN(n)&&n>=1&&n<=31);
+      if (days.length>0) {
+        const list = Array.from(new Set(days)).sort((a,b)=>a-b).join(',');
+        setNsCronAndDesc(`${parseInt(mm,10)} ${parseInt(hh,10)} ${list} * *`, `Hằng tháng các ngày ${list} lúc ${time}`);
+      }
+    } else if (mode==='preset'){
+      const v = document.getElementById('ns-cron-preset').value || '';
+      if (v) { document.getElementById('ns-cron').value = v; setNsCronAndDesc(v, 'Theo preset'); }
+    }
+  }
+  ['ns-cron-n','ns-cron-n-hour','ns-cron-time','ns-cron-time-week','ns-cron-days','ns-cron-time-month','ns-cron-preset'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('input', function(){ const activeTab = document.querySelector('#nsCronTabs .nav-link.active'); const mode = activeTab ? activeTab.getAttribute('data-mode') : 'min'; updateNsCronFromUI(mode); }); });
+  Array.from(document.querySelectorAll('.ns-cron-dow')).forEach(el => el.addEventListener('change', function(){ const activeTab = document.querySelector('#nsCronTabs .nav-link.active'); const mode = activeTab ? activeTab.getAttribute('data-mode') : 'min'; updateNsCronFromUI(mode); }));
+  document.getElementById('ns-cron').addEventListener('input', updateNsCronSummaryFromValue);
+  (function bindNsCronModal(){
+    const modal = document.getElementById('nsCronAdvModal');
+    if (!modal) return;
+    modal.addEventListener('shown.bs.modal', function(){
+      if (modal.dataset.init === '1') {
+        document.getElementById('ns-cron-desc').textContent = parseCronToDesc(document.getElementById('ns-cron').value);
+        return;
+      }
+      modal.dataset.init = '1';
+      const tabs = Array.from(document.querySelectorAll('#nsCronTabs .nav-link'));
+      const sections = Array.from(document.querySelectorAll('#nsCronControls [data-mode]'));
+      function showMode(mode){
+        tabs.forEach(t => t.classList.toggle('active', t.getAttribute('data-mode')===mode));
+        sections.forEach(s => s.classList.toggle('d-none', s.getAttribute('data-mode')!==mode));
+        updateNsCronFromUI(mode);
+        document.getElementById('ns-cron-desc').textContent = parseCronToDesc(document.getElementById('ns-cron').value);
+      }
+      tabs.forEach(t => t.addEventListener('click', () => showMode(t.getAttribute('data-mode'))));
+      ['ns-cron-n','ns-cron-n-hour','ns-cron-time','ns-cron-time-week','ns-cron-days','ns-cron-time-month','ns-cron-preset'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', () => {
+          const activeTab = document.querySelector('#nsCronTabs .nav-link.active');
+          const mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+          updateNsCronFromUI(mode);
+          document.getElementById('ns-cron-desc').textContent = parseCronToDesc(document.getElementById('ns-cron').value);
+        });
+      });
+      Array.from(document.querySelectorAll('.ns-cron-dow')).forEach(el => el.addEventListener('change', () => {
+        const activeTab = document.querySelector('#nsCronTabs .nav-link.active');
+        const mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+        updateNsCronFromUI(mode);
+        document.getElementById('ns-cron-desc').textContent = parseCronToDesc(document.getElementById('ns-cron').value);
+      }));
+      showMode('min');
+    });
+  })();
+  function applyNsCronFromModal(){
+    const activeTab = document.querySelector('#nsCronTabs .nav-link.active');
+    const mode = activeTab ? activeTab.getAttribute('data-mode') : 'min';
+    updateNsCronFromUI(mode);
+    updateNsCronSummaryFromValue();
+  }
+</script>
+<div class="modal fade" id="nsCronAdvModal" tabindex="-1" aria-labelledby="nsCronAdvLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="nsCronAdvLabel">Cấu hình Cron nâng cao</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-2" id="nsCronTabs">
+          <li class="nav-item"><button class="nav-link active" data-mode="min" type="button">Mỗi N phút</button></li>
+          <li class="nav-item"><button class="nav-link" data-mode="hour" type="button">Mỗi N giờ</button></li>
+          <li class="nav-item"><button class="nav-link" data-mode="daily" type="button">Hằng ngày</button></li>
+          <li class="nav-item"><button class="nav-link" data-mode="weekly" type="button">Hằng tuần</button></li>
+          <li class="nav-item"><button class="nav-link" data-mode="monthly" type="button">Hằng tháng (ngày cụ thể)</button></li>
+          <li class="nav-item"><button class="nav-link" data-mode="preset" type="button">Preset</button></li>
+        </ul>
+        <div id="nsCronControls">
+          <div class="row g-2" data-mode="min">
+            <div class="col-6"><input id="ns-cron-n" type="number" min="1" class="form-control form-control-sm" placeholder="N (phút)" /></div>
+          </div>
+          <div class="row g-2 d-none" data-mode="hour">
+            <div class="col-6"><input id="ns-cron-n-hour" type="number" min="1" class="form-control form-control-sm" placeholder="N (giờ)" /></div>
+          </div>
+          <div class="row g-2 d-none" data-mode="daily">
+            <div class="col-6"><input id="ns-cron-time" type="time" class="form-control form-control-sm" value="07:00" /></div>
+          </div>
+          <div class="row g-2 d-none" data-mode="weekly">
+            <div class="col-6"><input id="ns-cron-time-week" type="time" class="form-control form-control-sm" value="07:00" /></div>
+            <div class="col-12 mt-1">
+              <div class="d-flex flex-wrap gap-2">
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="1" id="ns-dow-1" /><label class="form-check-label" for="ns-dow-1">Thứ 2</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="2" id="ns-dow-2" /><label class="form-check-label" for="ns-dow-2">Thứ 3</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="3" id="ns-dow-3" /><label class="form-check-label" for="ns-dow-3">Thứ 4</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="4" id="ns-dow-4" /><label class="form-check-label" for="ns-dow-4">Thứ 5</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="5" id="ns-dow-5" /><label class="form-check-label" for="ns-dow-5">Thứ 6</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="6" id="ns-dow-6" /><label class="form-check-label" for="ns-dow-6">Thứ 7</label></div>
+                <div class="form-check"><input class="form-check-input ns-cron-dow" type="checkbox" value="0" id="ns-dow-0" /><label class="form-check-label" for="ns-dow-0">Chủ nhật</label></div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-2 d-none" data-mode="monthly">
+            <div class="col-8"><input id="ns-cron-days" class="form-control form-control-sm" placeholder="Ví dụ: 3,5,7" /></div>
+            <div class="col-4"><input id="ns-cron-time-month" type="time" class="form-control form-control-sm" value="07:00" /></div>
+          </div>
+          <div class="row g-2 d-none" data-mode="preset">
+            <div class="col-12">
+              <select id="ns-cron-preset" class="form-select form-select-sm">
+                <option value="">-- Chọn nhanh --</option>
+                <option value="*/5 * * * *">Mỗi 5 phút</option>
+                <option value="*/15 * * * *">Mỗi 15 phút</option>
+                <option value="0 * * * *">Mỗi giờ</option>
+                <option value="0 */2 * * *">Mỗi 2 giờ</option>
+                <option value="0 7 * * *">Hằng ngày 07:00</option>
+                <option value="0 19 * * *">Hằng ngày 19:00</option>
+                <option value="0 7 * * 1">Hằng tuần Thứ 2 07:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-2 small"><strong>Mô tả:</strong> <span id="ns-cron-desc">Chưa cấu hình</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="applyNsCronFromModal()">Áp dụng</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

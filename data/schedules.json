@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1765596293687,
+    "name": "lịch 2026",
+    "url": "https://vpf.vn/season/v-league-2026/?action=calendar&pagejs=1#",
+    "templateId": 1765595778527,
+    "cron": "*/30 * * * *",
+    "retainLimit": 5,
+    "isActive": true
+  },
+  {
+    "id": 1765688687021,
+    "name": "23333",
+    "url": "https://vpf.vn/season/v-league-2026/?action=calendar&pagejs=1#r",
+    "templateId": 1765595778527,
+    "cron": "0 */2 * * *",
+    "retainLimit": 5,
+    "isActive": false
+  }
+]
